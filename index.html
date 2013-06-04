@@ -5,12 +5,25 @@
 	<script type="text/javascript">
 	
 	$('document').ready(function(){
-		
+		$('#sidebar').append('<div> More Testing </div>');
 		var context = $('#test_canvas')[0].getContext('2d');
+		var bg_image = new Image();
+				bg_image.onload = function(){
+			context.drawImage(bg_image, 25, 50);
+		};
+		bg_image.src = "doe-small.jpg";
 		
-		context.rect(50, 50, 450, 450);
-		context.fill();
+		$('#test_canvas').on('mousemove', function(event){
+		var x = event.pageX - $('#test_canvas').offset().left;
+		var y = event.pageY - $('#test_canvas').offset().top;
+		
+		$('#output').html('<h3> '+ x + ', ' + y + ' </h3>');
+		$('#sidebar').html('Moving!');
+		});
+		
 	});
+	
+	
 	
 	</script>
 </head>
@@ -19,8 +32,9 @@
 		<div id="title"> Title </div>
 		<div  id="inner_container">
 			<div id="sidebar"> Aside </div>
-			<div id= "content">
+			<div id="content">
 				<canvas id="test_canvas" width="500px" height="500px"></canvas>
+				<div id="output"></div>
 			</div>
 		</div>
 	</div>
