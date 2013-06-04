@@ -1,13 +1,16 @@
 <html>
 <head>
 	<title> g y r o n a u t i l u s </title>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script type="text/javascript">
-	var canvas = $('#test_canvas');
-	var context = canvas[0].getContext('2d');
-	 
-	 ctx.rect(50, 50, 450, 450);
-	 ctx.stroke();
+	
+	$('document').ready(function(){
+		
+		var context = $('#test_canvas')[0].getContext('2d');
+		
+		context.rect(50, 50, 450, 450);
+		context.fill();
+	});
 	
 	</script>
 </head>
