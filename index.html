@@ -6,9 +6,11 @@
 	
 	var area_name;
 	var is_deer_blank = false;
+	var is_sky_blank = false;
 	
 	var bg_image = new Image(); 
 	var blank_deer = new Image();
+	var blank_sky = new Image();
 	
 	
 	
@@ -58,16 +60,31 @@
 	function changeCanvas(x, y)
 	{
 		var ctx = $('#test_canvas')[0].getContext('2d');
-		if(is_deer_blank){
-			ctx.drawImage(bg_image, 0, 15);
-			is_deer_blank = false;
-		}else{
-			if(area_name == "ground"){
+		if(area_name == 'ground'){
+			if(is_deer_blank){
+				ctx.drawImage(bg_image, 0, 15);
+				is_deer_blank = false;
+				if(is_sky_blank){
+					//Draw blank sky
+				}
+			}else{
 				ctx.drawImage(blank_deer, 0, 15);
 				is_deer_blank = true;
 			}
+		}else if(area_name == 'sky'){
+			if(is_sky_blank){
+			 	ctx.drawImage(bg_image, 0, 15);
+				is_sky_blank = false;
+				if(is_deer_blank){
+					ctx.drawImage(blank_deer, 0, 15);
+				}
+			}else{
+				//Draw blank sky
+				is_sky_blank = true;
+			}
 		}
 	}
+	
 	</script>
 </head>
 <body>
