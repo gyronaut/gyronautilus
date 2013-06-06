@@ -9,7 +9,6 @@
 	var is_sky_blank = false;
 	
 	var bg_image = new Image(); 
-	var blank_deer = new Image();
 	var blank_sky = new Image();
 	
 	var bird_animation_array = new Array();
@@ -18,9 +17,19 @@
 	bird_animation_array[2] = new Image();
 	bird_animation_array[3] = new Image();
 	bird_animation_array[4] = new Image();
+	
 	var bird_emerge_frame_1 = new Image();
 	var bird_emerge_frame_2 = new Image();
 	
+	var blank_deer = new Image();
+	var blank_deer_animation_array = new Array();
+	blank_deer_animation_array[0] = new Image();
+	blank_deer_animation_array[1] = new Image();
+	blank_deer_animation_array[2] = new Image();
+	blank_deer_animation_array[3] = new Image();
+	blank_deer_animation_array[4] = new Image();
+	blank_deer_animation_array[5] = new Image();
+	blank_deer_animation_array[6] = new Image();
 	
 	
 	$('document').ready(function(){		
@@ -61,6 +70,13 @@
 		bird_animation_array[4].src = "";
 		bird_emerge_frame_1.src = "";
 		bird_emerge_frame_2.src = "";
+		blank_deer_animation_array[0].src = "";
+		blank_deer_animation_array[1].src = "";
+		blank_deer_animation_array[2].src = "";
+		blank_deer_animation_array[3].src = "";
+		blank_deer_animation_array[4].src = "";
+		blank_deer_animation_array[5].src = "";
+		blank_deer_animation_array[6].src = "";
 	}
 	
 	function getAreaName(x, y)
@@ -81,18 +97,29 @@
 		//draw emerge frame 2
 		//wait
 		/*
-		for some number of frames
-			if bird is going to cover ground/sky (check x,y)
+		draw blank_deer
+		for some number of frames{
+			draw next bird frame at (x,y) (starting with 3)
+			increase (x,y)
+			wait
+			if bird is covering ground/sky (check x,y){
 				draw bg_image
 				if (is_sky_blank){
 					draw blank_sky
 				}
 			}
 			draw blank_deer
-			draw next bird frame at (x,y) (starting with 3)
-			increase (x,y)
-			wait
 		}
+		
+		*/
+	}
+	
+	function doBlankDeerAnimation(){
+		/*
+		for each frame in blank deer animation
+			draw frame
+			wait
+		draw final blank deer
 		*/
 	}
 	
@@ -107,8 +134,9 @@
 					ctx.drawImage(blank_sky, 0, 15);
 				}
 			}else{
+			//	doBlankDeerAnimation();	
 				ctx.drawImage(blank_deer, 0, 15);
-				doBirdAnimation();
+			//	doBirdAnimation();
 				is_deer_blank = true;
 			}
 		}else if(area_name == 'sky'){
