@@ -45,6 +45,7 @@
 		bg_image.src = "doe-med.jpg";
 		bg_image.id = "background_image";
 		blank_deer.src = "doe-blank.png";
+		blank_sky.src = "blank-sky.png";
 	}
 	
 	function getAreaName(x, y)
@@ -65,7 +66,7 @@
 				ctx.drawImage(bg_image, 0, 15);
 				is_deer_blank = false;
 				if(is_sky_blank){
-					//Draw blank sky
+					ctx.drawImage(blank_sky, 0, 15);
 				}
 			}else{
 				ctx.drawImage(blank_deer, 0, 15);
@@ -79,7 +80,7 @@
 					ctx.drawImage(blank_deer, 0, 15);
 				}
 			}else{
-				//Draw blank sky
+				ctx.drawImage(blank_sky, 0, 15);
 				is_sky_blank = true;
 			}
 		}
