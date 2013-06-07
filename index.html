@@ -31,6 +31,14 @@
 	blank_deer_animation_array[5] = new Image();
 	blank_deer_animation_array[6] = new Image();
 	
+	blank_deer_frame_pos_array = new Array();
+	blank_deer_frame_pos_array[0] = {top: 79, left: 57};
+	blank_deer_frame_pos_array[1] = {top: 107, left: 95};
+	blank_deer_frame_pos_array[2] = {top: 174, left: 102};
+	blank_deer_frame_pos_array[3] = {top: 239, left: 116};
+	blank_deer_frame_pos_array[4] = {top: 239, left: 194};
+	blank_deer_frame_pos_array[5] = {top: 239, left: 262};
+	blank_deer_frame_pos_array[6] = {top: 253, left: 301};
 	
 	$('document').ready(function(){		
 		var context = $('#test_canvas')[0].getContext('2d');
@@ -63,6 +71,7 @@
 		bg_image.src = "doe-med.jpg";
 		blank_deer.src = "doe-blank.png";
 		blank_sky.src = "blank-sky.png";
+		/*
 		bird_animation_array[0].src = "";
 		bird_animation_array[1].src = "";
 		bird_animation_array[2].src = "";
@@ -70,13 +79,14 @@
 		bird_animation_array[4].src = "";
 		bird_emerge_frame_1.src = "";
 		bird_emerge_frame_2.src = "";
-		blank_deer_animation_array[0].src = "";
-		blank_deer_animation_array[1].src = "";
-		blank_deer_animation_array[2].src = "";
-		blank_deer_animation_array[3].src = "";
-		blank_deer_animation_array[4].src = "";
-		blank_deer_animation_array[5].src = "";
-		blank_deer_animation_array[6].src = "";
+		*/
+		blank_deer_animation_array[0].src = "blank-doe-animation/blank-doe-frame-1.png";
+		blank_deer_animation_array[1].src = "blank-doe-animation/blank-doe-frame-2.png";
+		blank_deer_animation_array[2].src = "blank-doe-animation/blank-doe-frame-3.png";
+		blank_deer_animation_array[3].src = "blank-doe-animation/blank-doe-frame-4.png";
+		blank_deer_animation_array[4].src = "blank-doe-animation/blank-doe-frame-5.png";
+		blank_deer_animation_array[5].src = "blank-doe-animation/blank-doe-frame-6.png";
+		blank_deer_animation_array[6].src = "blank-doe-animation/blank-doe-frame-7.png";
 	}
 	
 	function getAreaName(x, y)
@@ -114,13 +124,17 @@
 		*/
 	}
 	
-	function doBlankDeerAnimation(){
-		/*
-		for each frame in blank deer animation
-			draw frame
-			wait
-		draw final blank deer
-		*/
+	function doBlankDeerAnimation(frame_num){
+		var ctx = $('#test_canvas')[0].getContext('2d');
+		if(frame_num < 7){
+			setTimeout(function(){
+				doBlankDeerAnimation(frame_num+1);
+			}, 100);
+			ctx.drawImage(blank_deer, 0, 15);
+			ctx.drawImage(blank_deer_animation_array[frame_num], blank_deer_frame_pos_array[frame_num].left, blank_deer_frame_pos_array[frame_num].top + 15);
+		}else{
+			ctx.drawImage(blank_deer, 0, 15);
+		}
 	}
 	
 	function changeCanvas(x, y)
@@ -134,8 +148,8 @@
 					ctx.drawImage(blank_sky, 0, 15);
 				}
 			}else{
-			//	doBlankDeerAnimation();	
-				ctx.drawImage(blank_deer, 0, 15);
+				doBlankDeerAnimation(0);	
+			//	ctx.drawImage(blank_deer, 0, 15);
 			//	doBirdAnimation();
 				is_deer_blank = true;
 			}
