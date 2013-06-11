@@ -5,6 +5,8 @@
 	<script type="text/javascript">
 	
 	var area_name;
+	var hit_regions;
+	
 	var is_deer_blank = false;
 	var is_sky_blank = false;
 	
@@ -50,7 +52,9 @@
 	blank_deer_frame_pos_array[5] = {top: 239, left: 262};
 	blank_deer_frame_pos_array[6] = {top: 253, left: 301};
 	
-	$('document').ready(function(){		
+	$('document').ready(function(){
+		hit_regions = getHitRegionContext(700, 571);
+		
 		var context = $('#test_canvas')[0].getContext('2d');
 		
 		initImages();
@@ -58,6 +62,8 @@
 		bg_image.onload = function(){
 			context.drawImage(bg_image, 0, 0);
 		};
+		
+		setupHitRegions();
 		
 		$('#test_canvas').on('mousemove', function(event){
 		var x = event.pageX - $('#test_canvas').offset().left;
@@ -76,6 +82,20 @@
 		});
 			
 	});
+	
+	function setUpHitRegions()
+	{
+		hitRegions.fillStyle('#FFFFFF');
+		hitRegions.fillRect(0, 0, 700, 571);
+	}
+	
+	function getHitRegionContext (width, height)
+	{
+		var hit_region_canvas = document.createElement('canvas');
+		hit_region_canvas.width = width;
+		hit_region_canvas.height = height;
+		return hit_region_canvas.getContext('2d');
+	}
 	
 	function initImages(){	
 		bg_image.src = "doe-med.jpg";
