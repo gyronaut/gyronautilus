@@ -1,12 +1,11 @@
 <html>
 <head>
 	<title> g y r o n a u t i l u s </title>
+	<link rel="stylesheet" type="text/css" href="gyrostyle.css" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	
 	var area_name;
-	var hit_regions;
-	
 	var is_deer_blank = false;
 	var is_sky_blank = false;
 	
@@ -52,9 +51,7 @@
 	blank_deer_frame_pos_array[5] = {top: 239, left: 262};
 	blank_deer_frame_pos_array[6] = {top: 253, left: 301};
 	
-	$('document').ready(function(){
-		hit_regions = getHitRegionContext(700, 571);
-		
+	$('document').ready(function(){		
 		var context = $('#test_canvas')[0].getContext('2d');
 		
 		initImages();
@@ -62,8 +59,6 @@
 		bg_image.onload = function(){
 			context.drawImage(bg_image, 0, 0);
 		};
-		
-		setupHitRegions();
 		
 		$('#test_canvas').on('mousemove', function(event){
 		var x = event.pageX - $('#test_canvas').offset().left;
@@ -82,20 +77,6 @@
 		});
 			
 	});
-	
-	function setUpHitRegions()
-	{
-		hitRegions.fillStyle('#FFFFFF');
-		hitRegions.fillRect(0, 0, 700, 571);
-	}
-	
-	function getHitRegionContext (width, height)
-	{
-		var hit_region_canvas = document.createElement('canvas');
-		hit_region_canvas.width = width;
-		hit_region_canvas.height = height;
-		return hit_region_canvas.getContext('2d');
-	}
 	
 	function initImages(){	
 		bg_image.src = "doe-med.jpg";
@@ -256,19 +237,26 @@
 					//doFillDeerAnimation(6);
 					doBirdAnimation(0, bird_frame_pos_array[0].left, bird_frame_pos_array[0].top);
 					is_deer_blank = false;
+					$('.selected').removeClass('selected');
+					$('.layertest').addClass('unselected');
 				}else{
 					is_active = true;
 					doBlankDeerAnimation(0);	
 					is_deer_blank = true;
+					$('.layertest').addClass('unselected');
+					$('#layer1').removeClass('unselected');
+					$('#layer1').addClass('selected');
 				}
 			}else if(area_name == 'sky'){
 				if(is_sky_blank){
+					$('.layertest').addClass('unselected');
 				 	ctx.drawImage(bg_image, 0, 0);
 					is_sky_blank = false;
 					if(is_deer_blank){
 						ctx.drawImage(blank_deer, 0, 0);
 					}
 				}else{
+					$('.layertest').addClass('unselected');
 					ctx.drawImage(blank_sky, 0, 0);
 					is_sky_blank = true;
 				}
@@ -286,6 +274,9 @@
 			<div id="content">
 				<canvas id="test_canvas" width="700px" height="600px"></canvas>
 				<div id="output"></div>
+				<div class="layerstest" id="layer1"> abasdfkl;jasklfguiopwqerjkl;mng,nzxmchfdjshouiqweryjnjgaljskaldfnmbnxmzlhausiotrqwhyouijasjkfnmzx,vnjklawhdfuiqwoeyrulhasdjkfhasjdhofuiqewyrouihasjklfhauiqoeyruiowhtuhasjdkflhuqweoyuioahsjdhfuioewryojasfklshdfwuioetyuiohjahdsufyoewruihgjdfklahjkdhoqewruyuighusahfjfyweouithjskadf </div>
+				<div class="layerstest" id="layer2"> 12345612348648731231645791654356129435613462979861346597613165973413197635613796463164976864316456796436311612679131567326</div>
+				<div class="layerstest" id="layer3"> ...........................................{{{{{{{{{{{{{{....................}{{{{{{{{{}{{{{{{{{}}}}......................}}}}}}}}}}}}}{.................................................................................................................................................{{{{{{}{{{{{{{{{{{}......</div>
 			</div>
 		</div>
 	</div>
