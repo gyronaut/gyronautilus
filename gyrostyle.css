@@ -1,20 +1,17 @@
-:root{
-	var-layer-top: 300px;
-	var-layer-left: 800px;
-}
 
 .layerstest{
-	width:300px;
-	height:100px;
-	transform: rotate(90deg);
-	-webkit-transform: rotate(90deg);
+	width:400px;
+	height:200px;
 	position:absolute;
 	float:left;
 	word-wrap:break-word;
-	font-weight:bold;
+	font-weight: 900;
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	clip:rect(0px, 400px, 200px, 0px);
 }
 .selected{
-	color:red;
+	color: #666666;
 	z-index: 4;
 }
 .unselected{
@@ -22,26 +19,32 @@
 	z-index:1;
 }
 #layer1{
-	top: var(layer-top);
-	left: var(layer-left);
+	top: 250px;
+	left: 700px;
+	font-size:15pt;
 }
 #layer2{
-	top: var(layer-top);
-	left: var(layer-left);	
+	top: 257px;
+	left: 692px;
+	font-size:25pt;	
 }
 #layer3{
-	top: var(layer-top);
-	left: var(layer-left);	
+	top: 246px;
+	left: 708px;
+	font-size:17pt;	
 }
 #layer4{
-	top: var(layer-top);
-	left: var(layer-left);	
+	top: 242px;
+	left: 698px;
+	font-size:30pt;	
 }
 #layer5{
-	top: var(layer-top);
-	left: var(layer-left);	
+	top: 253px;
+	left: 692px;
+	font-size:12pt;	
 }
 #layer6{
-	top: var(layer-top);
-	left: var(layer-left);	
+	top: 255px;
+	left: 702px;
+	font-size:20pt;	
 }
