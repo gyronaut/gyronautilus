@@ -14,6 +14,9 @@
 	
 	var is_active = false;
 	
+	/* Set up arrays for the bird animation images, as well as the positions of those
+	 * frames for when they're drawn on the canvas
+	 */
 	var bird_animation_array = new Array();
 	bird_animation_array[0] = new Image();
 	bird_animation_array[1] = new Image();
@@ -32,6 +35,9 @@
 	bird_frame_pos_array[5] = {top: 342, left: 299};
 	bird_frame_pos_array[6] = {top: 329, left: 319};	
 	
+	/* Sets up the arrays for the blank deer images, as well as the positions
+	 * for these images to be drawn onto the canvas.
+	 */
 	var blank_deer = new Image();
 	var blank_deer_animation_array = new Array();
 	blank_deer_animation_array[0] = new Image();
@@ -50,6 +56,37 @@
 	blank_deer_frame_pos_array[4] = {top: 239, left: 194};
 	blank_deer_frame_pos_array[5] = {top: 239, left: 262};
 	blank_deer_frame_pos_array[6] = {top: 253, left: 301};
+	
+	/* Set up Array defining each of the "sky-blocks" of corrugated
+	 * cardboard (should be hexagons, so 6 points each to define them).
+	 * This will allow paths to be drawn much easier around these
+	 * "sky blocks" allowing for animations when different parts of
+	 * the sky are clicked (also allows different paths to be drawn onto
+	 * the "hit regions" canvas to determine where the cursor is in the
+	 * image).
+	 */
+	sky_block_point_array = new Array();
+	for(var row = 0; row < 10; row++){
+		sky_block_point_array[row] = new Array();
+	}
+	sky_blocks_point_array[0][0] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][1] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][2] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][3] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][4] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][5] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][6] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][7] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][8] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][9] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][10] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][11] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][12] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][13] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][14] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[0][15] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[1][0] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	sky_blocks_point_array[1][1] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
 	
 	$('document').ready(function(){		
 		var context = $('#test_canvas')[0].getContext('2d');
