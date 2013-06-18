@@ -65,28 +65,29 @@
 	 * the "hit regions" canvas to determine where the cursor is in the
 	 * image).
 	 */
-	sky_block_point_array = new Array();
+	sky_block_regions = new Array();
 	for(var row = 0; row < 10; row++){
-		sky_block_point_array[row] = new Array();
+		sky_block_regions[row] = new Array();
 	}
-	sky_blocks_point_array[0][0] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][1] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][2] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][3] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][4] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][5] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][6] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][7] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][8] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][9] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][10] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][11] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][12] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][13] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][14] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[0][15] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[1][0] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
-	sky_blocks_point_array[1][1] = {p1: {x: 0, y: 0}, p2: {x: 0, y:0}, p3: {x: 0, y:0}, p4: {x: 0, y: 0}, p5: {x: 0, y: 0}, p6: {x: 0, y: 0}};
+	
+	sky_blocks_regions[0][0] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][1] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][2] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][3] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][4] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][5] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][6] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][7] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][8] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][9] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][10] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][11] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][12] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][13] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][14] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][15] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[1][0] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[1][1] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
 	
 	$('document').ready(function(){		
 		var context = $('#test_canvas')[0].getContext('2d');
@@ -228,6 +229,31 @@
 			}
 			ctx.restore();		
 		}	
+	}
+	
+	function doBlankDeerAnimationClipping(frame_num)
+	{
+		var ctx = $('#test_canvas')[0].getContext('2d');
+		if(frame_num < 7){
+			setTimeout(function(){
+				doBlankDeerAnimation(frame_num+1);
+			}, 100);
+			ctx.drawImage(blank_deer, 0, 0);
+			//ctx.save()
+			//ctx.beginPath();
+			//ctx.moveTo(deer_clipping_regions[frame_num][1].x, deer_clipping_regions[frame_num][1].y);
+			//for (var point = 2; point < deer_clipping_regions[frame_num][0].num_pts; point++){
+			//	ctx.lineTo(deer_clipping_regions[frame_num][point].x, deer_clipping_region[frame_num][point].y);
+			//}
+			//ctx.closePath();
+			//ctx.clip();
+			//ctx.drawImage(filled_deer, 0, 0);
+			//ctx.restore();
+			//
+			}else{
+			ctx.drawImage(blank_deer, 0, 0);
+			is_active = false;
+		}
 	}
 	
 	function doBlankDeerAnimation(frame_num)
