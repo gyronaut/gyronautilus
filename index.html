@@ -6,6 +6,8 @@
 	<script type="text/javascript">
 	
 	var area_name;
+	var sky_num_rows = 10;
+	var sky_num_cols = 15;
 	var is_deer_blank = false;
 	var is_sky_blank = false;
 	
@@ -66,7 +68,7 @@
 	 * image).
 	 */
 	sky_block_regions = new Array();
-	for(var row = 0; row < 10; row++){
+	for(var row = 0; row < sky_num_rows; row++){
 		sky_block_regions[row] = new Array();
 	}
 	
@@ -138,6 +140,9 @@
 		blank_deer_animation_array[6].src = "blank-doe-animation/blank-doe-frame-7.png";
 	}
 	
+	function drawHitRegions(){
+		
+	}
 	
 	function isInDeer(x,y)
 	{
@@ -289,6 +294,19 @@
 		}
 	}
 		
+	function doSkyAnimation(row, col, image, stage){
+		//if some end condition, stop.
+		//else do recursive function:
+		//setTimeout(function(){
+		//	doSkyAnimation(row, col, image, stage+1);
+		//}, 100);
+		//ctx.$('#test_canvas')[0].getContext('2d');
+		//ctx.save();
+		//create path based on row, col, and stage (using sky_blocks_regions)
+		//ctx.clip();
+		//ctx.drawImage(image, 0, 0);
+		//ctx.restore();
+	}
 	
 	function changeCanvas(x, y)
 	{
