@@ -41,7 +41,9 @@
 	/* Sets up the arrays for the blank deer images, as well as the positions
 	 * for these images to be drawn onto the canvas.
 	 */
+	
 	var blank_deer = new Image();
+	/*
 	var blank_deer_animation_array = new Array();
 	blank_deer_animation_array[0] = new Image();
 	blank_deer_animation_array[1] = new Image();
@@ -59,7 +61,7 @@
 	blank_deer_frame_pos_array[4] = {top: 239, left: 194};
 	blank_deer_frame_pos_array[5] = {top: 239, left: 262};
 	blank_deer_frame_pos_array[6] = {top: 253, left: 301};
-	
+	*/
 	var deer_clipping_regions = [];
 	
 	deer_clipping_regions[0] = [{num_pts: 15},  {x: 65, y: 79}, {x: 132, y: 123}, {x: 133, y: 97}, {x: 202, y: 97}, {x: 202, y: 120}, {x: 222, y: 117}, {x: 249, y: 90}, {x: 300, y: 86}, {x: 611, y: 86}, {x: 611, y: 375}, {x: 607, y: 377}, {x: 591, y: 368}, {x: 575, y: 397}, {x: 571, y:500 }, {x: 65, y: 500}];
@@ -85,24 +87,24 @@
 		sky_block_regions[row] = new Array();
 	}
 	
-	sky_blocks_regions[0][0] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][1] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][2] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][3] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][4] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][5] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][6] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][7] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][8] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][9] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][10] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][11] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][12] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][13] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][14] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][15] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[1][0] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[1][1] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][0] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][1] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][2] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][3] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][4] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][5] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][6] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][7] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][8] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][9] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][10] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][11] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][12] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][13] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][14] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][15] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[1][0] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[1][1] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
 	*/
 	
 	$('document').ready(function(){
@@ -162,7 +164,7 @@
 		bird_animation_array[4].src = "bird-animation/bird-frame-3.png";
 		bird_animation_array[5].src = "bird-animation/bird-frame-4.png";
 		bird_animation_array[6].src = "bird-animation/bird-frame-5.png";
-	
+		/*
 		blank_deer_animation_array[0].src = "blank-doe-animation/blank-doe-frame-1.png";
 		blank_deer_animation_array[1].src = "blank-doe-animation/blank-doe-frame-2.png";
 		blank_deer_animation_array[2].src = "blank-doe-animation/blank-doe-frame-3.png";
@@ -170,6 +172,7 @@
 		blank_deer_animation_array[4].src = "blank-doe-animation/blank-doe-frame-5.png";
 		blank_deer_animation_array[5].src = "blank-doe-animation/blank-doe-frame-6.png";
 		blank_deer_animation_array[6].src = "blank-doe-animation/blank-doe-frame-7.png";
+		*/
 	}
 	
 	function isInDeer(x,y)
@@ -251,7 +254,7 @@
 				ctx.restore();
 				ctx.drawImage(bird_animation_array[frame_index], new_left, new_top);
 				if(frame_num == 5){
-					doFillDeerAnimation(6);
+					doFillDeerAnimationClipping(6);
 				}
 			}
 		}else{
@@ -294,7 +297,7 @@
 			is_active = false;
 		}
 	}
-	
+	/*
 	function doBlankDeerAnimation(frame_num)
 	{
 		var ctx = $('#test_canvas')[0].getContext('2d');
@@ -309,7 +312,36 @@
 			is_active = false;
 		}
 	}
-	
+	*/
+	function doFillDeerAnimationClipping(frame_num){
+		var ctx = $('#test_canvas')[0].getContext('2d');
+		if(frame_num > -1){
+			setTimeout(function(){
+				doFillDeerAnimationClipping(frame_num-1);
+			}, 80);
+			ctx.drawImage(blank_deer, 0, 0);
+			ctx.save();
+			ctx.beginPath();
+			ctx.moveTo(deer_clipping_regions[frame_num][1].x, deer_clipping_regions[frame_num][1].y);
+			for (var point = 2; point < deer_clipping_regions[frame_num][0].num_pts + 1; point++){
+				ctx.lineTo(deer_clipping_regions[frame_num][point].x, deer_clipping_regions[frame_num][point].y);
+			}
+			ctx.closePath();
+			ctx.clip();
+			ctx.drawImage(bg_image, 0, 0);
+			if(is_sky_blank){
+				ctx.drawImage(blank_sky, 0, 0);
+			}
+			ctx.restore();			
+		}else{
+			ctx.drawImage(bg_image, 0, 0);
+			if(is_sky_blank){
+				ctx.drawImage(blank_sky, 0, 0);
+			}
+			is_active = false;
+		}
+	}
+	/*
 	function doFillDeerAnimation(frame_num)
 	{
 		var ctx = $('#test_canvas')[0].getContext('2d');
@@ -327,7 +359,7 @@
 			is_active = false;
 		}
 	}
-		
+	*/	
 	function doSkyAnimation(row, col, image_to_draw, stage){
 		//var ctx = $('#test_canvas')[0].getContext('2d');
 		//if(row+stage > some_number && row-stage < 0){
