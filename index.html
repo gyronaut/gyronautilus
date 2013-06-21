@@ -5,6 +5,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	
+	var hit_regions;
 	var area_name;
 	var is_deer_blank = false;
 	var is_sky_blank = false;
@@ -51,7 +52,8 @@
 	blank_deer_frame_pos_array[5] = {top: 239, left: 262};
 	blank_deer_frame_pos_array[6] = {top: 253, left: 301};
 	
-	$('document').ready(function(){		
+	$('document').ready(function(){	
+		drawRegions();
 		var context = $('#test_canvas')[0].getContext('2d');
 		
 		initImages();
@@ -77,6 +79,24 @@
 		});
 			
 	});
+	
+	function drawRegions(){
+		var hit_region_canvas = document.createElement('canvas');
+		hit_region_canvas.width = 700;
+		hit_region_canvas.height = 600;
+		hit_regions = hit_region_canvas.getContext('2d');
+		hit_regions.fillStyle = "rgb(255, 0, 0)";
+		hit_regions.beginPath();
+		hit_regions.moveTo(7, 258);
+		hit_regions.lineTo(40, 270);
+		hit_regions.lineTo(40, 310);
+		hit_regions.lineTo(7, 325);
+		hit_regions.closePath();
+		hit_regions.fill();
+		
+		
+		//document.body.appendChild(hit_region_canvas);
+	}
 	
 	function initImages(){	
 		bg_image.src = "doe-med.jpg";
@@ -104,8 +124,8 @@
 	function isInDeer(x,y)
 	{
 		var ctx = $('#test_canvas')[0].getContext('2d');
-		ctx.moveTo(60, 50);
 		ctx.beginPath();
+		ctx.moveTo(60, 50);
 		ctx.lineTo(90, 50);
 		ctx.lineTo(135, 115);
 		ctx.lineTo(200, 115);
@@ -133,7 +153,10 @@
 	
 	function getAreaName(x, y)
 	{
-		if(isInDeer(x, y)){
+		var data = hit_regions.getImageData(x, y, 1, 1).data;
+		if(data[0] > 254){
+			area_name = "block_1";
+		}else if(isInDeer(x, y)){
 			area_name = "deer";
 		}else if(y < 240){
 			area_name = "sky";
@@ -199,7 +222,7 @@
 		if(frame_num < 7){
 			setTimeout(function(){
 				doBlankDeerAnimation(frame_num+1);
-			}, 100);
+			}, 80);
 			ctx.drawImage(blank_deer, 0, 0);
 			ctx.drawImage(blank_deer_animation_array[frame_num], blank_deer_frame_pos_array[frame_num].left, blank_deer_frame_pos_array[frame_num].top);
 		}else{
@@ -214,7 +237,7 @@
 		if(frame_num > -1){
 			setTimeout(function(){
 				doFillDeerAnimation(frame_num-1);
-			}, 100);
+			}, 80);
 			ctx.drawImage(blank_deer, 0, 0);
 			ctx.drawImage(blank_deer_animation_array[frame_num], blank_deer_frame_pos_array[frame_num].left, blank_deer_frame_pos_array[frame_num].top);
 		}else{
