@@ -302,7 +302,28 @@
 		//}, 100);
 		//ctx.$('#test_canvas')[0].getContext('2d');
 		//ctx.save();
-		//create path based on row, col, and stage (using sky_blocks_regions)
+		//create path based on row, col, and stage (using sky_blocks_regions):
+		//var init_row = row - stage + 1;
+		//var init_col = col - stage + 1;
+		//var current_row = init_row;
+		//var current_col = init_col;
+		//ctx.beginPath();
+		//ctx.moveTo(init_row -> pt6)
+		/*Do top:*/
+		//for(current_col = init_col; current_col < init_col+stage; i++){
+		//	ctx.lineTo(sky_block_regions[current_row][current_col][1].x, sky_block_regions[current_row][current_col][1].y);
+		//	ctx.lineTo(sky_block_regions[current_row][current_col][2].x, sky_block_regions[current_row][current_col][2].y);
+		//}
+		/*Do top-right:*/
+		/*Do bottom-right:*/
+		/*Do bottom:*/
+		//for(current_col = init_col + stage - 1; current_col > init_col; current_col--;){
+		//	ctx.lineTo(sky_block_regions[current_row][current_col][4].x, sky_block_regions[current_row][current_col][4].y);
+		//	ctx.lineTo(sky_block_regions[current_row][current_col][5].x, sky_block_regions[current_row][current_col][5].y);
+		//}
+		/*Do bottom-left:*/
+		/*Do top-left:*/
+		//ctx.closePath();
 		//ctx.clip();
 		//ctx.drawImage(image, 0, 0);
 		//ctx.restore();
