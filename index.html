@@ -7,6 +7,8 @@
 	
 	var hit_regions;
 	var area_name;
+	var sky_num_rows = 10;
+	var sky_num_cols = 15;
 	var is_deer_blank = false;
 	var is_sky_blank = false;
 	
@@ -15,6 +17,9 @@
 	
 	var is_active = false;
 	
+	/* Set up arrays for the bird animation images, as well as the positions of those
+	 * frames for when they're drawn on the canvas
+	 */
 	var bird_animation_array = new Array();
 	bird_animation_array[0] = new Image();
 	bird_animation_array[1] = new Image();
@@ -33,6 +38,9 @@
 	bird_frame_pos_array[5] = {top: 342, left: 299};
 	bird_frame_pos_array[6] = {top: 329, left: 319};	
 	
+	/* Sets up the arrays for the blank deer images, as well as the positions
+	 * for these images to be drawn onto the canvas.
+	 */
 	var blank_deer = new Image();
 	var blank_deer_animation_array = new Array();
 	blank_deer_animation_array[0] = new Image();
@@ -52,7 +60,39 @@
 	blank_deer_frame_pos_array[5] = {top: 239, left: 262};
 	blank_deer_frame_pos_array[6] = {top: 253, left: 301};
 	
-	$('document').ready(function(){	
+	/* Set up Array defining each of the "sky-blocks" of corrugated
+	 * cardboard (should be hexagons, so 6 points each to define them).
+	 * This will allow paths to be drawn much easier around these
+	 * "sky blocks" allowing for animations when different parts of
+	 * the sky are clicked (also allows different paths to be drawn onto
+	 * the "hit regions" canvas to determine where the cursor is in the
+	 * image).
+	 */
+	sky_block_regions = new Array();
+	for(var row = 0; row < sky_num_rows; row++){
+		sky_block_regions[row] = new Array();
+	}
+	
+	sky_blocks_regions[0][0] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][1] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][2] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][3] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][4] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][5] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][6] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][7] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][8] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][9] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][10] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][11] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][12] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][13] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][14] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[0][15] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[1][0] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_blocks_regions[1][1] = [{x: 0, y: 0}, {x: 0, y:0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	
+	$('document').ready(function(){
 		drawRegions();
 		var context = $('#test_canvas')[0].getContext('2d');
 		
@@ -120,6 +160,9 @@
 		blank_deer_animation_array[6].src = "blank-doe-animation/blank-doe-frame-7.png";
 	}
 	
+	function drawHitRegions(){
+		
+	}
 	
 	function isInDeer(x,y)
 	{
@@ -216,6 +259,31 @@
 		}	
 	}
 	
+	function doBlankDeerAnimationClipping(frame_num)
+	{
+		var ctx = $('#test_canvas')[0].getContext('2d');
+		if(frame_num < 7){
+			setTimeout(function(){
+				doBlankDeerAnimation(frame_num+1);
+			}, 100);
+			ctx.drawImage(blank_deer, 0, 0);
+			//ctx.save()
+			//ctx.beginPath();
+			//ctx.moveTo(deer_clipping_regions[frame_num][1].x, deer_clipping_regions[frame_num][1].y);
+			//for (var point = 2; point < deer_clipping_regions[frame_num][0].num_pts; point++){
+			//	ctx.lineTo(deer_clipping_regions[frame_num][point].x, deer_clipping_region[frame_num][point].y);
+			//}
+			//ctx.closePath();
+			//ctx.clip();
+			//ctx.drawImage(filled_deer, 0, 0);
+			//ctx.restore();
+			//
+			}else{
+			ctx.drawImage(blank_deer, 0, 0);
+			is_active = false;
+		}
+	}
+	
 	function doBlankDeerAnimation(frame_num)
 	{
 		var ctx = $('#test_canvas')[0].getContext('2d');
@@ -249,6 +317,40 @@
 		}
 	}
 		
+	function doSkyAnimation(row, col, image, stage){
+		//if some end condition, stop.
+		//else do recursive function:
+		//setTimeout(function(){
+		//	doSkyAnimation(row, col, image, stage+1);
+		//}, 100);
+		//ctx.$('#test_canvas')[0].getContext('2d');
+		//ctx.save();
+		//create path based on row, col, and stage (using sky_blocks_regions):
+		//var init_row = row - stage + 1;
+		//var init_col = col - stage + 1;
+		//var current_row = init_row;
+		//var current_col = init_col;
+		//ctx.beginPath();
+		//ctx.moveTo(init_row -> pt6)
+		/*Do top:*/
+		//for(current_col = init_col; current_col < init_col+stage; i++){
+		//	ctx.lineTo(sky_block_regions[current_row][current_col][1].x, sky_block_regions[current_row][current_col][1].y);
+		//	ctx.lineTo(sky_block_regions[current_row][current_col][2].x, sky_block_regions[current_row][current_col][2].y);
+		//}
+		/*Do top-right:*/
+		/*Do bottom-right:*/
+		/*Do bottom:*/
+		//for(current_col = init_col + stage - 1; current_col > init_col; current_col--;){
+		//	ctx.lineTo(sky_block_regions[current_row][current_col][4].x, sky_block_regions[current_row][current_col][4].y);
+		//	ctx.lineTo(sky_block_regions[current_row][current_col][5].x, sky_block_regions[current_row][current_col][5].y);
+		//}
+		/*Do bottom-left:*/
+		/*Do top-left:*/
+		//ctx.closePath();
+		//ctx.clip();
+		//ctx.drawImage(image, 0, 0);
+		//ctx.restore();
+	}
 	
 	function changeCanvas(x, y)
 	{
