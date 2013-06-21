@@ -11,6 +11,8 @@
 	var sky_num_cols = 15;
 	var is_deer_blank = false;
 	var is_sky_blank = false;
+	var sky_start_cell;
+	var max_sky_distance;
 	
 	var bg_image = new Image(); 
 	var blank_sky = new Image();
@@ -362,8 +364,8 @@
 	*/	
 	function doSkyAnimation(row, col, image_to_draw, stage){
 		//var ctx = $('#test_canvas')[0].getContext('2d');
-		//if(row+stage > some_number && row-stage < 0){
-		//	ctx.drawImage(blank_sky, 0, 0);
+		//if(stop condition(involving "max_sky_distance" and "stage")){
+		//	ctx.drawImage(image_to_draw, 0, 0);
 		//}else{
 		//setTimeout(function(){
 		//	doSkyAnimation(row, col, image, stage+1);
@@ -377,17 +379,9 @@
 		//ctx.beginPath();
 		//ctx.moveTo(init_row -> pt6)
 		/*Do top:*/
-		//for(current_col = init_col; current_col < init_col+stage; i++){
-		//	ctx.lineTo(sky_block_regions[current_row][current_col][1].x, sky_block_regions[current_row][current_col][1].y);
-		//	ctx.lineTo(sky_block_regions[current_row][current_col][2].x, sky_block_regions[current_row][current_col][2].y);
-		//}
 		/*Do top-right:*/
 		/*Do bottom-right:*/
 		/*Do bottom:*/
-		//for(current_col = init_col + stage - 1; current_col > init_col; current_col--;){
-		//	ctx.lineTo(sky_block_regions[current_row][current_col][4].x, sky_block_regions[current_row][current_col][4].y);
-		//	ctx.lineTo(sky_block_regions[current_row][current_col][5].x, sky_block_regions[current_row][current_col][5].y);
-		//}
 		/*Do bottom-left:*/
 		/*Do top-left:*/
 		//ctx.closePath();
@@ -395,6 +389,27 @@
 		//ctx.drawImage(image, 0, 0);
 		//ctx.restore();
 		//}
+	}
+	
+	function getSkyRegion(x,y){
+		/* Use hit region canvas and the cursor position to determine what cell was clicked.\
+		 * Something like:
+		 *	var data = hit_regions.getImageData(x, y, 1, 1).data;
+		 *	var cell = {};
+		 *	cell.row = (data[0] - data[0]%10)/10;
+		 *	cell.col = (data[1] - data[1]%10)/10;
+		 *	return cell;
+		 */
+	}
+	
+	function getMaxSkyDistance(row, col){
+		/* Use row and col of start cell to find the distance to each of the 4 corners of the
+		 * sky, and compare them to find the maximum (in units of sky-grid cells), then return
+		 * that value.  This will be used to determine when the recursive sky animation function
+		 * should stop (every time the "stage" is incremented, the radius goes up by 1 sky-grid
+		 * cell unit - the stage needs to be incremented until it is bigger than this max
+		 * distance).
+		 */
 	}
 	
 	function changeCanvas(x, y)
@@ -427,6 +442,9 @@
 					}
 				}else{
 					$('.layertest').addClass('unselected');
+					//var sky_start_cell = getSkyRegion(x, y);
+					//max_sky_distance = getMaxSkyDistance(sky_start_cell.row, sky_start_cell.col);
+					//doSkyAnimation(sky_start_cell.row, sky_start_cell.col, 1);
 					ctx.drawImage(blank_sky, 0, 0);
 					is_sky_blank = true;
 				}
