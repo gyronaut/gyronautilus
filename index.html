@@ -8,7 +8,7 @@
 	var hit_regions;
 	var area_name;
 	var sky_num_rows = 10;
-	var sky_num_cols = 15;
+	var sky_num_cols = 13;
 	var is_deer_blank = false;
 	var is_sky_blank = false;
 	var sky_start_cell;
@@ -83,32 +83,34 @@
 	 * image).
 	 */
 	 
-	/*
-	var sky_block_regions = new Array();
+	
+	var sky_block_regions = [];
 	for(var row = 0; row < sky_num_rows; row++){
-		sky_block_regions[row] = new Array();
+		sky_block_regions[row] = [];
 	}
 	
-	sky_blocks_regions[0][0] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][1] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][2] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][3] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][4] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][5] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][6] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][7] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][8] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][9] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][10] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][11] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][12] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][13] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][14] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[0][15] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[1][0] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_blocks_regions[1][1] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y:0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	*/
+	sky_block_regions[0][0] = [{x: 65, y: 35}, {x: 80, y: 36}, {x: 80, y: 60}, {x: 67, y: 70}, {x: 43, y: 53}, {x: 45, y: 35}];
+	sky_block_regions[0][1] = [{x: 97, y: 23}, {x: 117, y: 47}, {x: 117, y: 67}, {x: 95, y: 83}, {x: 80, y: 60}, {x: 80, y: 41}];
+	sky_block_regions[0][2] = [{x: 144, y: 23}, {x: 168, y: 50}, {x: 168, y: 64}, {x: 142, y: 85}, {x: 117, y: 67}, {x: 117, y: 47}];
+	sky_block_regions[0][3] = [{x: 196, y: 26}, {x: 220, y: 57}, {x: 220, y: 69}, {x: 199, y: 85}, {x: 168, y: 64}, {x: 168, y: 50}];
+	sky_block_regions[0][4] = [{x: 248, y: 27}, {x: 278, y: 55}, {x: 278, y: 69}, {x: 253, y: 90}, {x: 220, y: 69}, {x: 220, y: 57}];
+	sky_block_regions[0][5] = [{x: 310, y: 30}, {x: 345, y: 55}, {x: 345, y: 67}, {x: 317, y: 98}, {x: 278, y: 69}, {x: 278, y: 55}];
+	sky_block_regions[0][6] = [{x: 379, y: 27}, {x: 408, y: 57}, {x: 408, y: 69}, {x: 379, y: 93}, {x: 345, y: 67}, {x: 345, y: 55}];
+	sky_block_regions[0][7] = [{x: 439, y: 26}, {x: 463, y: 55}, {x: 463, y: 68}, {x: 435, y: 87}, {x: 408, y: 69}, {x: 408, y: 57}];
+	sky_block_regions[0][8] = [{x: 489, y: 27}, {x: 514, y: 52}, {x: 514, y: 64}, {x: 486, y: 86}, {x: 463, y: 68}, {x: 463, y: 55}];
+	sky_block_regions[0][9] = [{x: 540, y: 27}, {x: 566, y: 52}, {x: 566, y: 64}, {x: 543, y: 83}, {x: 514, y: 64}, {x: 514, y: 52}];
+	sky_block_regions[0][10] = [{x: 597, y: 24}, {x: 622, y: 48}, {x: 622, y: 61}, {x: 592, y: 84}, {x: 566, y: 64}, {x: 566, y: 52}];
+	sky_block_regions[0][11] = [{x: 650, y: 28}, {x: 675, y: 46}, {x: 675, y: 57}, {x: 648, y: 79}, {x: 622, y: 61}, {x: 622, y: 48}];
+	sky_block_regions[0][12] = [{x: 693, y: 29}, {x: 693, y: 50}, {x: 693, y: 60}, {x: 693, y: 73}, {x: 675, y: 57}, {x: 675, y: 46}];
 	
+	/*
+	sky_block_regions[0][13] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_block_regions[0][14] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_block_regions[0][15] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_block_regions[1][0] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_block_regions[1][1] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	*/
+		
 	$('document').ready(function(){
 		drawRegions();
 		var context = $('#test_canvas')[0].getContext('2d');
@@ -142,6 +144,8 @@
 		hit_region_canvas.width = 700;
 		hit_region_canvas.height = 600;
 		hit_regions = hit_region_canvas.getContext('2d');
+		
+		//Testing hit_regions idea with block on the ground (upperleft on ground)
 		hit_regions.fillStyle = "rgb(255, 0, 0)";
 		hit_regions.beginPath();
 		hit_regions.moveTo(7, 258);
@@ -151,7 +155,21 @@
 		hit_regions.closePath();
 		hit_regions.fill();
 		
+		//drawing different sky regions on the hit_regions canvas - the color is column dependant as rgb(0, 10*(col+1), 0)
+		for(var col = 0; col < 13; col++){
+			var color = "rgb(0, "+((col+1)*10)+", 0)";
+			hit_regions.fillStyle = color;
+			hit_regions.beginPath();
+			hit_regions.moveTo(sky_block_regions[0][col][0].x, sky_block_regions[0][col][0].y);
+			for (var point  = 1; point < 6; point++){
+				hit_regions.lineTo(sky_block_regions[0][col][point].x, sky_block_regions[0][col][point].y);
+			}
+			hit_regions.closePath();
+			hit_regions.fill();
+		}
+		
 		//document.body.appendChild(hit_region_canvas);
+		
 	}
 	
 	function initImages(){	
@@ -215,7 +233,11 @@
 		}else if(isInDeer(x, y)){
 			area_name = "deer";
 		}else if(y < 240){
-			area_name = "sky";
+			if(data[1] > 0){
+				area_name = "sky_region_"+((data[1] - data[1]%10)/10);
+			}else{
+				area_name = "sky";
+			}
 		}else{
 			area_name = "ground";
 		}
@@ -432,7 +454,7 @@
 					$('#layer6').removeClass('unselected');
 					$('#layer6').addClass('selected');
 				}
-			}else if(area_name == 'sky'){
+			}else if(area_name.substring(0, 3) == 'sky'){
 				if(is_sky_blank){
 					$('.layertest').addClass('unselected');
 				 	ctx.drawImage(bg_image, 0, 0);
