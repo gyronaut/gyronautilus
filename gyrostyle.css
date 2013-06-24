@@ -8,6 +8,8 @@
 	transform: rotate(90deg);
 	-webkit-transform: rotate(90deg);
 	clip:rect(0px, 400px, 200px, 0px);
+	transition: color .25s linear .1s;
+	-webkit-transition: color .25s linear .1s;
 }
 .selected{
 	color: #222222;
