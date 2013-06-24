@@ -82,35 +82,127 @@
 	 * the "hit regions" canvas to determine where the cursor is in the
 	 * image).
 	 */
-	 
+
 	
-	var sky_block_regions = [];
+	var sky_block_regions = {};
 	for(var row = 0; row < sky_num_rows; row++){
-		sky_block_regions[row] = [];
+		var key = "row_" + row;
+		sky_block_regions[key] = {};
 	}
 	
-	sky_block_regions[0][0] = [{x: 65, y: 35}, {x: 80, y: 36}, {x: 80, y: 60}, {x: 67, y: 70}, {x: 43, y: 53}, {x: 45, y: 35}];
-	sky_block_regions[0][1] = [{x: 97, y: 23}, {x: 117, y: 47}, {x: 117, y: 67}, {x: 95, y: 83}, {x: 80, y: 60}, {x: 80, y: 41}];
-	sky_block_regions[0][2] = [{x: 144, y: 23}, {x: 168, y: 50}, {x: 168, y: 64}, {x: 142, y: 85}, {x: 117, y: 67}, {x: 117, y: 47}];
-	sky_block_regions[0][3] = [{x: 196, y: 26}, {x: 220, y: 57}, {x: 220, y: 69}, {x: 199, y: 85}, {x: 168, y: 64}, {x: 168, y: 50}];
-	sky_block_regions[0][4] = [{x: 248, y: 27}, {x: 278, y: 55}, {x: 278, y: 69}, {x: 253, y: 90}, {x: 220, y: 69}, {x: 220, y: 57}];
-	sky_block_regions[0][5] = [{x: 310, y: 30}, {x: 345, y: 55}, {x: 345, y: 67}, {x: 317, y: 98}, {x: 278, y: 69}, {x: 278, y: 55}];
-	sky_block_regions[0][6] = [{x: 379, y: 27}, {x: 408, y: 57}, {x: 408, y: 69}, {x: 379, y: 93}, {x: 345, y: 67}, {x: 345, y: 55}];
-	sky_block_regions[0][7] = [{x: 439, y: 26}, {x: 463, y: 55}, {x: 463, y: 68}, {x: 435, y: 87}, {x: 408, y: 69}, {x: 408, y: 57}];
-	sky_block_regions[0][8] = [{x: 489, y: 27}, {x: 514, y: 52}, {x: 514, y: 64}, {x: 486, y: 86}, {x: 463, y: 68}, {x: 463, y: 55}];
-	sky_block_regions[0][9] = [{x: 540, y: 27}, {x: 566, y: 52}, {x: 566, y: 64}, {x: 543, y: 83}, {x: 514, y: 64}, {x: 514, y: 52}];
-	sky_block_regions[0][10] = [{x: 597, y: 24}, {x: 622, y: 48}, {x: 622, y: 61}, {x: 592, y: 84}, {x: 566, y: 64}, {x: 566, y: 52}];
-	sky_block_regions[0][11] = [{x: 650, y: 28}, {x: 675, y: 46}, {x: 675, y: 57}, {x: 648, y: 79}, {x: 622, y: 61}, {x: 622, y: 48}];
-	sky_block_regions[0][12] = [{x: 693, y: 29}, {x: 693, y: 50}, {x: 693, y: 60}, {x: 693, y: 73}, {x: 675, y: 57}, {x: 675, y: 46}];
+	//sky_block_regions["row_0"]["col_1"] = [{x: , y: }, {x: , y: }, {x: , y: }, {x: , y: }, {x: , y: }, {x: 80, y: 36}];
+	sky_block_regions["row_0"]["col_3"] = [{x: 117, y: 23}, {x: 144, y: 23}, {x: 145, y: 24}, {x: 116, y: 48}, {x: 96, y: 25}, {x: 97, y: 23}];
+	sky_block_regions["row_0"]["col_5"] = [{x: 168, y: 23}, {x: 195, y: 23}, {x: 195, y: 27}, {x: 168, y: 51}, {x: 143, y: 24}, {x: 143, y: 23}];
+	sky_block_regions["row_0"]["col_7"] = [{x: 220, y: 23}, {x: 247, y: 23}, {x: 247, y: 28}, {x: 220, y: 58}, {x: 195, y: 27}, {x: 195, y: 23}]; 
+	sky_block_regions["row_0"]["col_9"] = [{x: 278, y: 23}, {x: 309, y: 23}, {x: 309, y: 31}, {x: 278, y: 56}, {x: 247, y: 28}, {x: 247, y: 23}]; 
+	sky_block_regions["row_0"]["col_11"] = [{x: 345, y: 23}, {x: 378, y: 23}, {x: 378, y: 28}, {x: 345, y: 56}, {x: 309, y: 31}, {x: 309, y: 23}]; 
+	sky_block_regions["row_0"]["col_13"] = [{x: 408, y: 23}, {x: 438, y: 23}, {x: 438, y: 27}, {x: 408, y: 58}, {x: 378, y: 28}, {x: 378, y: 23}]; 
+	sky_block_regions["row_0"]["col_15"] = [{x: 463, y: 23}, {x: 488, y: 23}, {x: 488, y: 28}, {x: 463, y: 56}, {x: 438, y: 27}, {x: 438, y: 23}]; 
+	sky_block_regions["row_0"]["col_17"] = [{x: 514, y: 23}, {x: 539, y: 23}, {x: 539, y: 28}, {x: 514, y: 53}, {x: 488, y: 28}, {x: 488, y: 23}]; 
+	sky_block_regions["row_0"]["col_19"] = [{x: 566, y: 23}, {x: 596, y: 23}, {x: 596, y: 25}, {x: 566, y: 53}, {x: 539, y: 28}, {x: 539, y: 23}]; 
+	sky_block_regions["row_0"]["col_21"] = [{x: 622, y: 23}, {x: 649, y: 23}, {x: 649, y: 29}, {x: 622, y: 49}, {x: 596, y: 25}, {x: 596, y: 23}]; 
+	sky_block_regions["row_0"]["col_23"] = [{x: 675, y: 23}, {x: 692, y: 23}, {x: 692, y: 30}, {x: 675, y: 47}, {x: 649, y: 29}, {x: 649, y: 23}]; 
 	
+	sky_block_regions["row_1"]["col_0"] = [{x: 65, y: 35}, {x: 80, y: 36}, {x: 80, y: 60}, {x: 67, y: 70}, {x: 43, y: 53}, {x: 45, y: 35}];
+	sky_block_regions["row_1"]["col_2"] = [{x: 97, y: 23}, {x: 117, y: 47}, {x: 117, y: 67}, {x: 95, y: 83}, {x: 80, y: 60}, {x: 80, y: 41}];
+	sky_block_regions["row_1"]["col_4"] = [{x: 144, y: 23}, {x: 168, y: 50}, {x: 168, y: 64}, {x: 142, y: 85}, {x: 117, y: 67}, {x: 117, y: 47}];
+	sky_block_regions["row_1"]["col_6"] = [{x: 196, y: 26}, {x: 220, y: 57}, {x: 220, y: 69}, {x: 199, y: 85}, {x: 168, y: 64}, {x: 168, y: 50}];
+	sky_block_regions["row_1"]["col_8"] = [{x: 248, y: 27}, {x: 278, y: 55}, {x: 278, y: 69}, {x: 253, y: 90}, {x: 220, y: 69}, {x: 220, y: 57}];
+	sky_block_regions["row_1"]["col_10"] = [{x: 310, y: 30}, {x: 345, y: 55}, {x: 345, y: 67}, {x: 317, y: 98}, {x: 278, y: 69}, {x: 278, y: 55}];
+	sky_block_regions["row_1"]["col_12"] = [{x: 379, y: 27}, {x: 408, y: 57}, {x: 408, y: 69}, {x: 379, y: 93}, {x: 345, y: 67}, {x: 345, y: 55}];
+	sky_block_regions["row_1"]["col_14"] = [{x: 439, y: 26}, {x: 463, y: 55}, {x: 463, y: 68}, {x: 435, y: 87}, {x: 408, y: 69}, {x: 408, y: 57}];
+	sky_block_regions["row_1"]["col_16"] = [{x: 489, y: 27}, {x: 514, y: 52}, {x: 514, y: 64}, {x: 486, y: 86}, {x: 463, y: 68}, {x: 463, y: 55}];
+	sky_block_regions["row_1"]["col_18"] = [{x: 540, y: 27}, {x: 566, y: 52}, {x: 566, y: 64}, {x: 543, y: 83}, {x: 514, y: 64}, {x: 514, y: 52}];
+	sky_block_regions["row_1"]["col_20"] = [{x: 597, y: 24}, {x: 622, y: 48}, {x: 622, y: 61}, {x: 592, y: 84}, {x: 566, y: 64}, {x: 566, y: 52}];
+	sky_block_regions["row_1"]["col_22"] = [{x: 650, y: 28}, {x: 675, y: 46}, {x: 675, y: 57}, {x: 648, y: 79}, {x: 622, y: 61}, {x: 622, y: 48}];
+	sky_block_regions["row_1"]["col_24"] = [{x: 693, y: 29}, {x: 693, y: 50}, {x: 693, y: 60}, {x: 693, y: 73}, {x: 675, y: 57}, {x: 675, y: 46}];
 	/*
-	sky_block_regions[0][13] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_block_regions[0][14] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_block_regions[0][15] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_block_regions[1][0] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-	sky_block_regions[1][1] = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+	sky_block_regions["row_2"]["col_1"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_3"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_5"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_7"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_9"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_11"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_13"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_15"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_17"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_19"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_21"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_2"]["col_23"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+
+	sky_block_regions["row_3"]["col_1"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_3"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_5"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_7"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_9"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_11"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_13"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_15"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_17"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_19"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_21"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_3"]["col_23"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	
+	sky_block_regions["row_4"]["col_1"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_3"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_5"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_7"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_9"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_11"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_13"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_15"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_17"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_19"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_21"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_4"]["col_23"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	
+	sky_block_regions["row_5"]["col_1"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_3"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_5"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_7"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_9"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_11"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_13"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_15"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_17"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_19"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_21"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_5"]["col_23"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	
+	sky_block_regions["row_6"]["col_1"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_3"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_5"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_7"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_9"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_11"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_13"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_15"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_17"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_19"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_21"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
+	sky_block_regions["row_6"]["col_23"] = [{}, {}, {x: , y: }, {x: , y: }, {x: , y: }, {}];
 	*/
-		
+	/*
+	for(var row = 2; row < sky_num_rows; row++){
+		var row_key = "row_"+row;
+		if(row%2 == 1){
+			for(var col = 0; col < 25; col+=2){
+				var col_key = "col_"+col;
+				sky_block_regions[row_key][col_key][0] = sky_block_regions["row_"+(row-1)]["col_"+(col-1)][2];
+				sky_block_regions[row_key][col_key][5] = sky_block_regions["row_"+(row-1)]["col_"+(col-1)][3];
+				sky_block_regions[row_key][col_key][1] = sky_block_regions["row_"+(row-1)]["col_"+(col+1)][3];
+			}
+		}else{
+			for(val col = 1; col < 25; col+=2){
+				var col_key = "col_"+col;
+				sky_block_regions[row_key][col_key][0] = sky_block_regions["row_"+(row-1)]["col_"+(col-1)][2];
+				sky_block_regions[row_key][col_key][5] = sky_block_regions["row_"+(row-1)]["col_"+(col-1)][3];
+				sky_block_regions[row_key][col_key][1] = sky_block_regions["row_"+(row-1)]["col_"+(col+1)][3];				
+			}
+		}
+	}
+	*/	
+	
 	$('document').ready(function(){
 		drawRegions();
 		var context = $('#test_canvas')[0].getContext('2d');
@@ -156,18 +248,36 @@
 		hit_regions.fill();
 		
 		//drawing different sky regions on the hit_regions canvas - the color is column dependant as rgb(0, 10*(col+1), 0)
-		for(var col = 0; col < 13; col++){
-			var color = "rgb(0, "+((col+1)*10)+", 0)";
-			hit_regions.fillStyle = color;
-			hit_regions.beginPath();
-			hit_regions.moveTo(sky_block_regions[0][col][0].x, sky_block_regions[0][col][0].y);
-			for (var point  = 1; point < 6; point++){
-				hit_regions.lineTo(sky_block_regions[0][col][point].x, sky_block_regions[0][col][point].y);
+		for(var row = 0; row < 2; row++){
+			var row_key = "row_"+row;
+			if(row%2 == 1){
+				for(var col = 0; col < 25; col+=2){
+					var col_key = "col_"+col;
+					var color = "rgb(0, "+((col+1)*10)+", "+((row+1)*10)+")";
+					hit_regions.fillStyle = color;
+					hit_regions.beginPath();
+					hit_regions.moveTo(sky_block_regions[row_key][col_key][0].x, sky_block_regions[row_key][col_key][0].y);
+					for (var point  = 1; point < 6; point++){
+						hit_regions.lineTo(sky_block_regions[row_key][col_key][point].x, sky_block_regions[row_key][col_key][point].y);
+					}
+					hit_regions.closePath();
+					hit_regions.fill();
+				}
+			}else{
+				for(var col = 3; col < 25; col+=2){
+					var col_key = "col_"+col;
+					var color = "rgb(0, "+((col+1)*10)+", "+((row+1)*10)+")";
+					hit_regions.fillStyle = color;
+					hit_regions.beginPath();
+					hit_regions.moveTo(sky_block_regions[row_key][col_key][0].x, sky_block_regions[row_key][col_key][0].y);
+					for (var point  = 1; point < 6; point++){
+						hit_regions.lineTo(sky_block_regions[row_key][col_key][point].x, sky_block_regions[row_key][col_key][point].y);
+					}
+					hit_regions.closePath();
+					hit_regions.fill();
+				}
 			}
-			hit_regions.closePath();
-			hit_regions.fill();
-		}
-		
+		}	
 		//document.body.appendChild(hit_region_canvas);
 		
 	}
@@ -234,7 +344,7 @@
 			area_name = "deer";
 		}else if(y < 240){
 			if(data[1] > 0){
-				area_name = "sky_region_"+((data[1] - data[1]%10)/10);
+				area_name = "skyCell_"+((data[2] - data[2]%10)/10)+"_"+((data[1] - data[1]%10)/10);
 			}else{
 				area_name = "sky";
 			}
