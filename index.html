@@ -283,7 +283,33 @@
 					hit_regions.fill();
 				}
 			}
-		}	
+		}
+		
+		hit_regions.fillStyle = 'rgb(200, 0, 200)';
+		hit_regions.beginPath();
+		hit_regions.moveTo(60, 50);
+		hit_regions.lineTo(90, 50);
+		hit_regions.lineTo(135, 115);
+		hit_regions.lineTo(200, 115);
+		hit_regions.lineTo(235, 75);
+		hit_regions.lineTo(305, 50);
+		hit_regions.lineTo(295, 105);
+		hit_regions.lineTo(260, 135);
+		hit_regions.lineTo(215, 140);
+		hit_regions.lineTo(215, 280);
+		hit_regions.lineTo(370, 250);
+		hit_regions.lineTo(540, 285);
+		hit_regions.lineTo(605, 330);
+		hit_regions.lineTo(615, 425);
+		hit_regions.lineTo(160, 470);
+		hit_regions.lineTo(190, 440);
+		hit_regions.lineTo(130, 360);
+		hit_regions.lineTo(130, 235);
+		hit_regions.lineTo(110, 155);
+		hit_regions.lineTo(80, 120);
+		hit_regions.closePath();
+		hit_regions.fill();
+		
 		//document.body.appendChild(hit_region_canvas);
 		
 	}
@@ -346,7 +372,8 @@
 		var data = hit_regions.getImageData(x, y, 1, 1).data;
 		if(data[0] > 254){
 			area_name = "block_1";
-		}else if(isInDeer(x, y)){
+		//}else if(isInDeer(x, y)){
+		}else if(data[0] = 200){	
 			area_name = "deer";
 		}else if(y < 240){
 			if(data[1] > 0){
