@@ -10,15 +10,14 @@
 	clip:rect(0px, 400px, 200px, 0px);
 	transition: color .25s linear .1s;
 	-webkit-transition: color .25s linear .1s;
+	color: #C0C0C0;
+	z-index: 0;
 }
 .selected{
-	color: #222222;
+	color: #000000;
 	z-index: 10;
 }
-.unselected{
-	color:#CCCCCC;
-	z-index:1;
-}
+
 #layer1{
 	top: 250px;
 	left: 700px;
