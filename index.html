@@ -42,36 +42,23 @@
 	bird_frame_pos_array[5] = {top: 342, left: 299};
 	bird_frame_pos_array[6] = {top: 329, left: 319};	
 	
-	/* Sets up the arrays for the blank deer images, as well as the positions
-	 * for these images to be drawn onto the canvas.
-	 */
-	
 	var blank_deer = new Image();
-	/*
-	var blank_deer_animation_array = new Array();
-	blank_deer_animation_array[0] = new Image();
-	blank_deer_animation_array[1] = new Image();
-	blank_deer_animation_array[2] = new Image();
-	blank_deer_animation_array[3] = new Image();
-	blank_deer_animation_array[4] = new Image();
-	blank_deer_animation_array[5] = new Image();
-	blank_deer_animation_array[6] = new Image();
 	
-	blank_deer_frame_pos_array = new Array();
-	blank_deer_frame_pos_array[0] = {top: 79, left: 57};
-	blank_deer_frame_pos_array[1] = {top: 107, left: 95};
-	blank_deer_frame_pos_array[2] = {top: 174, left: 102};
-	blank_deer_frame_pos_array[3] = {top: 239, left: 116};
-	blank_deer_frame_pos_array[4] = {top: 239, left: 194};
-	blank_deer_frame_pos_array[5] = {top: 239, left: 262};
-	blank_deer_frame_pos_array[6] = {top: 253, left: 301};
-	*/
 	var deer_clipping_regions = [];
+ 
 	var sky_block_regions = new Array(sky_num_rows);
 	for(var row = 0; row < sky_num_rows; row++){
 		sky_block_regions[row] = new Array(sky_num_cols);
 	}
 	
+ /* Sets up up all of the clipping/hit regions necessary for the deer and sky animations. The
+  * sky is divided up so that every hexagonal cell is it's own region, and it uses the fact that
+  * all cells are touching to define the points in terms of other hexagons (for a non-edge cell,
+  * if the cells above it are defined, then only the bottom and bottom-right points are required
+  * to completely determine the cell - once these are defined, it can then fill in the remaining
+  * points by looking at adjacent cells that have already been defined).
+  */
+  
 	function initRegions(){
 		deer_clipping_regions[0] = [{num_pts: 15},  {x: 65, y: 79}, {x: 132, y: 123}, {x: 133, y: 97}, {x: 202, y: 97}, {x: 202, y: 120}, {x: 222, y: 117}, {x: 249, y: 90}, {x: 300, y: 86}, {x: 611, y: 86}, {x: 611, y: 375}, {x: 607, y: 377}, {x: 591, y: 368}, {x: 575, y: 397}, {x: 571, y:500 }, {x: 65, y: 500}];
 		deer_clipping_regions[1] = [{num_pts: 18}, {x: 110, y: 151}, {x: 128, y: 150}, {x: 139, y: 115}, {x: 190, y: 94}, {x: 189, y: 124}, {x: 200, y: 144}, {x: 182, y: 171}, {x: 182, y: 183}, {x: 187, y: 196}, {x: 214, y: 185}, {x: 577, y: 185}, {x: 577, y: 303}, {x: 591, y: 364}, {x: 577, y: 392}, {x: 514, y: 392}, {x: 455, y: 453}, {x: 455, y: 500}, {x: 110, y: 500}];
@@ -88,10 +75,7 @@
 		 * the sky are clicked (also allows different paths to be drawn onto
 		 * the "hit regions" canvas to determine where the cursor is in the
 		 * image).
-		 */
-	
-		
-		
+		 */		
 		
 		sky_block_regions[0][1] = [{x: 90, y: 23}, {x: 96, y: 23}, {x: 96, y: 25}, {x: 67, y: 70}, {x: 80 , y: 37}, {x: 80, y: 36}];
 		sky_block_regions[0][3] = [{x: 117, y: 23}, {x: 144, y: 23}, {x: 145, y: 24}, {x: 116, y: 48}, {x: 96, y: 25}, {x: 97, y: 23}];
@@ -188,7 +172,6 @@
 		
 		for(var row = 2; row < 7; row++){
 			if(row%2 == 1){
-			
 				for(var col = 0; col < 25; col+=2){
 					if(row!=3 || col>4){
 						if(col == 0){
@@ -251,6 +234,7 @@
 	}	
 	
 	$('document').ready(function(){
+ 
 		var context = $('#test_canvas')[0].getContext('2d');
 		
 		initImages();
@@ -264,11 +248,8 @@
 		$('#test_canvas').on('mousemove', function(event){
 			var x = event.pageX - $('#test_canvas').offset().left;
 			var y = event.pageY - $('#test_canvas').offset().top;
-		
 			$('#output').html('( '+ x + ', ' + y + ' )');
-		
 			getAreaName(x, y, false);
-		
 		});
 		
 		$('#test_canvas').on('mouseout', function(event){
@@ -293,18 +274,8 @@
 		hit_region_canvas.width = 700;
 		hit_region_canvas.height = 600;
 		hit_regions = hit_region_canvas.getContext('2d');
-		
-		//Testing hit_regions idea with block on the ground (upperleft on ground)
-		hit_regions.fillStyle = "rgb(255, 0, 0)";
-		hit_regions.beginPath();
-		hit_regions.moveTo(7, 258);
-		hit_regions.lineTo(40, 270);
-		hit_regions.lineTo(40, 310);
-		hit_regions.lineTo(7, 325);
-		hit_regions.closePath();
-		hit_regions.fill();
-		
-		//drawing different sky regions on the hit_regions canvas - the color is column dependant as rgb(0, 10*(col+1), 0)
+
+		//drawing different sky regions on the hit_regions canvas - the color is row/column dependant as rgb(0, 10*(col+1), 20*(row+1))
 		for(var row = 0; row < 7; row++){
 			if(row%2 == 1){
 				var init_col = 0;
@@ -348,6 +319,8 @@
 			}
 		}
 		
+  /* Draw region that contains the deer body:
+   */
 		hit_regions.fillStyle = 'rgb(200, 0, 200)';
 		hit_regions.beginPath();
 		hit_regions.moveTo(60, 50);
@@ -389,15 +362,6 @@
 		bird_animation_array[4].src = "bird-animation/bird-frame-3.png";
 		bird_animation_array[5].src = "bird-animation/bird-frame-4.png";
 		bird_animation_array[6].src = "bird-animation/bird-frame-5.png";
-		/*
-		blank_deer_animation_array[0].src = "blank-doe-animation/blank-doe-frame-1.png";
-		blank_deer_animation_array[1].src = "blank-doe-animation/blank-doe-frame-2.png";
-		blank_deer_animation_array[2].src = "blank-doe-animation/blank-doe-frame-3.png";
-		blank_deer_animation_array[3].src = "blank-doe-animation/blank-doe-frame-4.png";
-		blank_deer_animation_array[4].src = "blank-doe-animation/blank-doe-frame-5.png";
-		blank_deer_animation_array[5].src = "blank-doe-animation/blank-doe-frame-6.png";
-		blank_deer_animation_array[6].src = "blank-doe-animation/blank-doe-frame-7.png";
-		*/
 	}
 	
 	function isInDeer(x,y)
@@ -427,7 +391,6 @@
 		ctx.closePath();
 		
 		return ctx.isPointInPath(x, y);
-		
 	}
 	
 	function getAreaName(x, y, on_enter_canvas)
@@ -545,22 +508,7 @@
 			is_active = false;
 		}
 	}
-	/*
-	function doBlankDeerAnimation(frame_num)
-	{
-		var ctx = $('#test_canvas')[0].getContext('2d');
-		if(frame_num < 7){
-			setTimeout(function(){
-				doBlankDeerAnimation(frame_num+1);
-			}, 80);
-			ctx.drawImage(blank_deer, 0, 0);
-			ctx.drawImage(blank_deer_animation_array[frame_num], blank_deer_frame_pos_array[frame_num].left, blank_deer_frame_pos_array[frame_num].top);
-		}else{
-			ctx.drawImage(blank_deer, 0, 0);
-			is_active = false;
-		}
-	}
-	*/
+	
 	function doFillDeerAnimationClipping(frame_num){
 		var ctx = $('#test_canvas')[0].getContext('2d');
 		if(frame_num > -1){
@@ -589,25 +537,7 @@
 			is_active = false;
 		}
 	}
-	/*
-	function doFillDeerAnimation(frame_num)
-	{
-		var ctx = $('#test_canvas')[0].getContext('2d');
-		if(frame_num > -1){
-			setTimeout(function(){
-				doFillDeerAnimation(frame_num-1);
-			}, 80);
-			ctx.drawImage(blank_deer, 0, 0);
-			ctx.drawImage(blank_deer_animation_array[frame_num], blank_deer_frame_pos_array[frame_num].left, blank_deer_frame_pos_array[frame_num].top);
-		}else{
-			ctx.drawImage(bg_image, 0, 0);
-			if(is_sky_blank){
-				ctx.drawImage(blank_sky, 0, 0);
-			}
-			is_active = false;
-		}
-	}
-	*/	
+	
 	function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 	
 		var ctx = $('#test_canvas')[0].getContext('2d');
@@ -842,7 +772,6 @@
 			if(area_name == 'deer'){
 				if(is_deer_blank){
 					is_active = true;
-					//doFillDeerAnimation(6);
 					doBirdAnimation(0, bird_frame_pos_array[0].left, bird_frame_pos_array[0].top);
 					is_deer_blank = false;
 					$('.selected').removeClass('selected');
@@ -877,7 +806,6 @@
 							doSkyAnimation(sky_start_cell.row, sky_start_cell.col, blank_sky, 0, 5, is_shifted);
 						}else{
 							doSkyAnimation(sky_start_cell.row, sky_start_cell.col, blank_sky, 0, 5, is_shifted);
-							//ctx.drawImage(blank_sky, 0, 0);
 							is_sky_blank = true;
 							if(is_deer_blank){
 								ctx.drawImage(blank_deer, 0, 0);
