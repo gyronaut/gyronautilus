@@ -5,7 +5,7 @@ Code for gyronautilus.com website - experiments with javascript, html canvas, in
 
 Current State
 -----------------
-##Doe Painting (temporarily untitled)##
+###Doe Painting (temporarily untitled)###
 + Hit Regions: 
   + Shapes that represent distinct interactive areas are drawn in distinct colors on an invisible "hit-regions" canvas.  This allows for event functions to check the color on this invisible canvas and immediately know what interactive region of the image they're in.
 + Deer Animation: 
@@ -18,7 +18,7 @@ Current State
 
 Future Goals
 -----------------
-##Doe Painting##
+###Doe Painting###
 + Correct Hit Regions: 
   + Certain portions on the left hand side of the sky are still not properly sectioned out, and don't respond properly
 + Finish/Polish Sky animation: 
@@ -26,15 +26,14 @@ Future Goals
 + More animation options: 
   + Using just the animation functions that are now defined, figure out new ways to use those animations.
   + Ideas: 
-
     + ctrl-click could cause different results.
     + shift-clicking the deer could change the behaviour (maybe bird comes out on color drain if you shift click?)
     + "supernova" - if the user types in the word "supernova", the sky animation could be staggered/layered/"rippled" in a chaotic way (similarly with the deer).
 
-##Other Images##
+###Other Images###
 + Transitions
   + Play around with adding transition animations that would take the viewer from one painting to the next (utilizing some sort of continuous element - the bird maybe?).  Could keep the basic structure of the page the same, just "shift the view" of the canvas over to one side (could also change the surrounding area - new text layers, something else entirely, etc.
 
-##Other Things##
+###Misc. Ideas###
 + Constant animations:
   + look into having some sort of constant animation running in the background (for another piece, maybe leaves/grass blowing in the wind). Think about how to keep a constant background animation going while still having interactive, dynamic changes happening at arbitrary times (possibly through having several overlapping canvas elements being simultaneously drawn to).
