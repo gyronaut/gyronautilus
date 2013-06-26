@@ -607,7 +607,7 @@
 		}
 	}
 	*/	
-	function doSkyAnimation(row, col, image_to_draw, stage){
+	function doSkyAnimation(row, col, image_to_draw, stage, count){
 	
 		var ctx = $('#test_canvas')[0].getContext('2d');
 		if(stage > 5){
@@ -617,8 +617,20 @@
 			}
 			is_active = false;
 		}else{
+			if(stage==1 && count > 0 && is_deer_blank){
+				count--;
+				if(image_to_draw == blank_sky){
+					setTimeout(function(){
+						doSkyAnimation(row, col, bg_image, 0, count)
+					}, 1);
+				}else{
+					setTimeout(function(){
+						doSkyAnimation(row, col, blank_sky, 0, count)
+					}, 1);
+				}
+			}
 			setTimeout(function(){
-				doSkyAnimation(row, col, image_to_draw, stage+1);
+				doSkyAnimation(row, col, image_to_draw, stage+1, 0);
 			}, 80);
 			ctx.save();
 			//create path based on row, col, and stage (using sky_blocks_regions):
@@ -841,7 +853,7 @@
 					//max_sky_distance = getMaxSkyDistance(sky_start_cell.row, sky_start_cell.col);
 					if(sky_start_cell.row>=0 && sky_start_cell.col>=0 && (sky_start_cell.row%2 != sky_start_cell.col%2 || sky_start_cell.col < 4)){
 						is_active = true;
-						doSkyAnimation(sky_start_cell.row, sky_start_cell.col, bg_image, 0);
+						doSkyAnimation(sky_start_cell.row, sky_start_cell.col, bg_image, 0, 5);
 						is_sky_blank = false;
 						if(is_deer_blank){
 							ctx.drawImage(blank_deer, 0, 0);
@@ -852,7 +864,7 @@
 					//max_sky_distance = getMaxSkyDistance(sky_start_cell.row, sky_start_cell.col);
 					if(sky_start_cell.row>=0 && sky_start_cell.col>=0 && (sky_start_cell.row%2 != sky_start_cell.col%2 || sky_start_cell.col < 4)){
 						is_active = true;
-						doSkyAnimation(sky_start_cell.row, sky_start_cell.col, blank_sky, 0);
+						doSkyAnimation(sky_start_cell.row, sky_start_cell.col, blank_sky, 0, 5);
 						//ctx.drawImage(blank_sky, 0, 0);
 						is_sky_blank = true;
 						if(is_deer_blank){
