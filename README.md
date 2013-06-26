@@ -14,6 +14,7 @@ Current State
   + If you shift-click a cell, then that particular cell will change, but the rest of the sky will not (note: the state of each cell is not currently tracked, so the cell will change to the opposite of the sky state, not toggle back and forth).
 + Layered Text:
   + On mousing over a part of the painting, a distinct block of text is brought to the foreground amongst several stacked text blocks.  This is accomplished solely through CSS (no javascript), and is more just a test of what's possible.
+
 Future Goals
 -----------------
 + Correct Hit Regions: 
