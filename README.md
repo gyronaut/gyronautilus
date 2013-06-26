@@ -28,4 +28,4 @@ Future Goals
     + shift-clicking the deer could change the behaviour (maybe bird comes out on color drain if you shift click?)
     + "supernova" - if the user types in the word "supernova", the sky animation could be staggered/layered/"rippled" in a chaotic way (similarly with the deer).
 + Constant animations:
-  + look into having some sort of constant animation running in the background (for another piece, maybe leaves/grass blowing in the wind). Think about how to keep a constant background animation going while still having interactive, dynamic changes happening at arbitrary times.
+  + look into having some sort of constant animation running in the background (for another piece, maybe leaves/grass blowing in the wind). Think about how to keep a constant background animation going while still having interactive, dynamic changes happening at arbitrary times (possibly through having several overlapping canvas elements being simultaneously drawn to).
