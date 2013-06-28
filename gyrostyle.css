@@ -53,13 +53,29 @@
 	width: 0;
 	height: 3px;
 	border-top: 35px solid transparent;
-	border-left: 55px solid red;
+	border-left: 55px solid;
 	border-bottom: 35px solid transparent;
         border-radius: 5px;
+        display: inline-block;
 }
-.enabled{
+.enabled-right{
 	border-left-color: #444444;	
 }
-.disabled{
+.disabled-right{
 	border-left-color:#CCCCCC;
+}
+.triangle-left {
+	width: 0;
+	height: 3px;
+	border-top: 35px solid transparent;
+	border-right: 55px solid;
+	border-bottom: 35px solid transparent;
+        border-radius: 5px;
+        display: inline-block;
+}
+.enabled-left{
+	border-right-color: #444444;	
+}
+.disabled-left{
+	border-right-color:#CCCCCC;
 }
