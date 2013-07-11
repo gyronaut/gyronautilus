@@ -50,6 +50,8 @@
 }
 
 .triangle-right {
+	position: relative;
+	left: 500px;
 	width: 0;
 	height: 3px;
 	border-top: 35px solid transparent;
@@ -65,6 +67,8 @@
 	border-left-color:#CCCCCC;
 }
 .triangle-left {
+	position: relative;
+	left: 100px;
 	width: 0;
 	height: 3px;
 	border-top: 35px solid transparent;
