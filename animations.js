@@ -10,7 +10,9 @@ var sky_start_cell;
 var max_sky_distance;
 var did_area_change = false;
 
-var bg_image = new Image(); 
+var doe_image = new Image();
+var bird_image = new Image();
+var current_image = new Image(); 
 var blank_sky = new Image();
 
 var is_active = false;
@@ -310,7 +312,7 @@ function drawRegions(){
 }
 
 function initImages(){	
-	bg_image.src = "doe-med.jpg";
+	doe_image.src = "doe-med.jpg";
 	blank_deer.src = "doe-blank.png";
 	blank_sky.src = "blank-sky.png";
 	
@@ -401,7 +403,7 @@ function doBirdAnimation(frame_num, left, top)
 			setTimeout(function(){
 				doBirdAnimation(frame_num+1, bird_frame_pos_array[frame_num+1].left, bird_frame_pos_array[frame_num+1].top);
 			}, 80);
-			ctx.drawImage(bg_image, 0, 0);
+			ctx.drawImage(doe_image, 0, 0);
 			if(is_sky_blank){
 				ctx.drawImage(blank_sky, 0, 0);
 			}
@@ -416,7 +418,7 @@ function doBirdAnimation(frame_num, left, top)
 			ctx.beginPath();
 			ctx.rect(left, top, 86, 86);
 			ctx.clip();
-			ctx.drawImage(bg_image, 0, 0);
+			ctx.drawImage(doe_image, 0, 0);
 			if(is_sky_blank){
 				ctx.drawImage(blank_sky, 0, 0);
 			}
@@ -432,7 +434,7 @@ function doBirdAnimation(frame_num, left, top)
 		ctx.beginPath();
 		ctx.rect(left - 35, top + 25, 86, 86);
 		ctx.clip();
-		ctx.drawImage(bg_image, 0, 0);
+		ctx.drawImage(doe_image, 0, 0);
 		if(is_sky_blank){
 		ctx.drawImage(blank_sky, 0, 0);
 		}
@@ -456,7 +458,7 @@ function doBlankDeerAnimationClipping(frame_num)
 		}
 		ctx.closePath();
 		ctx.clip();
-		ctx.drawImage(bg_image, 0, 0);
+		ctx.drawImage(doe_image, 0, 0);
 		ctx.restore();
 		if(is_sky_blank){
 			ctx.drawImage(blank_sky, 0, 0);
@@ -483,13 +485,13 @@ function doFillDeerAnimationClipping(frame_num){
 		}
 		ctx.closePath();
 		ctx.clip();
-		ctx.drawImage(bg_image, 0, 0);
+		ctx.drawImage(doe_image, 0, 0);
 		if(is_sky_blank){
 			ctx.drawImage(blank_sky, 0, 0);
 		}
 		ctx.restore();			
 	}else{
-		ctx.drawImage(bg_image, 0, 0);
+		ctx.drawImage(doe_image, 0, 0);
 		if(is_sky_blank){
 			ctx.drawImage(blank_sky, 0, 0);
 		}
@@ -514,7 +516,7 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 			count--;
 			if(image_to_draw == blank_sky){
 				setTimeout(function(){
-					doSkyAnimation(row, col, bg_image, 0, count)
+					doSkyAnimation(row, col, doe_image, 0, count)
 				}, 5);
 			}else{
 				setTimeout(function(){
@@ -807,9 +809,9 @@ function changeCanvas(x, y, is_shifted)
 				if(sky_start_cell.row>=0 && sky_start_cell.col>=0 && (sky_start_cell.row%2 != sky_start_cell.col%2 || sky_start_cell.col < 4)){
 					is_active = true;
 					if(is_shifted){
-						doSkyAnimation(sky_start_cell.row, sky_start_cell.col, bg_image, 0, 5, is_shifted);
+						doSkyAnimation(sky_start_cell.row, sky_start_cell.col, doe_image, 0, 5, is_shifted);
 					}else{
-						doSkyAnimation(sky_start_cell.row, sky_start_cell.col, bg_image, 0, 5, is_shifted);
+						doSkyAnimation(sky_start_cell.row, sky_start_cell.col, doe_image, 0, 5, is_shifted);
 						is_sky_blank = false;
 						if(is_deer_blank){
 							ctx.drawImage(blank_deer, 0, 0);
@@ -834,4 +836,11 @@ function changeCanvas(x, y, is_shifted)
 			}
 		}
 	}
+}
+
+function transitionAnimation(){
+	var ctx = $('#test_canvas')[0].getContext('2d');
+	bird_image.src = "birdpainting_test.png";
+	$('#next_pic').removeClass('enabled-right').addClass('disabled-right');
+	$('#prev_pic').removeClass('disabled-left').addClass('enabled-left');
 }
