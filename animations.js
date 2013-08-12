@@ -12,7 +12,10 @@ var did_area_change = false;
 
 var doe_image = new Image();
 var bird_image = new Image();
-var current_image = new Image(); 
+var main_images = new Array();
+main_images[0] = doe_image;
+main_images[1] = bird_image;
+
 var blank_sky = new Image();
 
 var is_active = false;
@@ -315,6 +318,7 @@ function initImages(){
 	doe_image.src = "doe-med.jpg";
 	blank_deer.src = "doe-blank.png";
 	blank_sky.src = "blank-sky.png";
+	bird_image.src = "birdpainting_test.png";
 	
 	bird_animation_array[0].src = "bird-animation/bird-emerge-frame-1.png";
 	bird_animation_array[1].src = "bird-animation/bird-emerge-frame-2.png";
@@ -837,10 +841,25 @@ function changeCanvas(x, y, is_shifted)
 		}
 	}
 }
-
-function transitionAnimation(){
+function drawNewImage(index){
 	var ctx = $('#test_canvas')[0].getContext('2d');
-	bird_image.src = "birdpainting_test.png";
-	$('#next_pic').removeClass('enabled-right').addClass('disabled-right');
-	$('#prev_pic').removeClass('disabled-left').addClass('enabled-left');
+	ctx.clearRect(0, 0, 700, 575);
+	hit_regions.clearRect(0, 0, 700, 575);
+	ctx.drawImage(main_images[index], 0, 0);
+	if(index==0){
+		drawRegions();
+	}
+}
+
+function transitionAnimation(index){
+	drawNewImage(index);
+	if(index==1){
+		$('#next_pic').removeClass('enabled-right active').addClass('disabled-right inactive');
+		$('#prev_pic').removeClass('disabled-left inactive').addClass('enabled-left active')
+	}else if(index==0){
+		$('#next_pic').removeClass('disabled-right inactive').addClass('enabled-right active');
+		$('#prev_pic').removeClass('enabled-left active').addClass('disabled-left inactive');
+		is_deer_blank = false;
+		is_sky_blank = false;
+	}
 }

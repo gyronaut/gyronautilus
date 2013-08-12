@@ -48,7 +48,12 @@
 	left: 702px;
 	font-size:20pt;	
 }
-
+.active {
+	cursor: pointer;
+}
+.inactive {
+	cursor: default;
+}
 .triangle-right {
 	position: relative;
 	left: 500px;
