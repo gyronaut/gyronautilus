@@ -12,9 +12,11 @@ var did_area_change = false;
 
 var doe_image = new Image();
 var bird_image = new Image();
+var rabbit_image = new Image();
 var main_images = new Array();
 main_images[0] = doe_image;
 main_images[1] = bird_image;
+main_images[2] = rabbit_image;
 
 var blank_sky = new Image();
 
@@ -319,6 +321,7 @@ function initImages(){
 	blank_deer.src = "doe-blank.png";
 	blank_sky.src = "blank-sky.png";
 	bird_image.src = "birdpainting_test.png";
+	rabbit_image.src = "rabbit_test.png";
 	
 	bird_animation_array[0].src = "bird-animation/bird-emerge-frame-1.png";
 	bird_animation_array[1].src = "bird-animation/bird-emerge-frame-2.png";
@@ -379,16 +382,20 @@ function getAreaName(x, y, on_enter_canvas)
 	$('#output').append('<h5>'+ area_name +'</h5>');
 	did_area_change = !(previous_area_name == area_name);
 	if(did_area_change || on_enter_canvas){
+		$('#test_canvas').removeClass('active').addClass('inactive');
 		$('.selected').removeClass('selected');
 		switch(area_name.substring(0,3)){
 			case "sky":
 				$('#layer4').addClass('selected');
+				$('#test_canvas').removeClass('inactive').addClass('active');
 				break;
 			case "gro":
 				$('#layer5').addClass('selected');
+				$('#test_canvas').removeClass('active').addClass('inactive');
 				break;
 			case "dee":
 				$('#layer6').addClass('selected');
+				$('#test_canvas').removeClass('inactive').addClass('active');
 				break;
 			default:
 				break;
@@ -853,13 +860,16 @@ function drawNewImage(index){
 
 function transitionAnimation(index){
 	drawNewImage(index);
-	if(index==1){
+	if(index==2){
 		$('#next_pic').removeClass('enabled-right active').addClass('disabled-right inactive');
-		$('#prev_pic').removeClass('disabled-left inactive').addClass('enabled-left active')
+		$('#prev_pic').removeClass('disabled-left inactive').addClass('enabled-left active');
 	}else if(index==0){
 		$('#next_pic').removeClass('disabled-right inactive').addClass('enabled-right active');
 		$('#prev_pic').removeClass('enabled-left active').addClass('disabled-left inactive');
 		is_deer_blank = false;
 		is_sky_blank = false;
+	}else{
+		$('#next_pic').removeClass('disabled-right inactive').addClass('enabled-right active');
+		$('#prev_pic').removeClass('disabled-left inactive').addClass('enabled-left active');
 	}
 }
