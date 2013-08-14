@@ -47,6 +47,7 @@ Future Goals
   + Add a grid/row of squares that can be clicked on to move directly to a different image.
   + Allow arrow keys to also scroll through images (left and right arrows)
   + Fix the way the Doe image defines the "sky" region, so that what parts are interactive can be properly reset between images.
+
 ###Misc. Ideas###
 + **Constant animations:**
   + look into having some sort of constant animation running in the background (for another piece, maybe leaves/grass blowing in the wind). Think about how to keep a constant background animation going while still having interactive, dynamic changes happening at arbitrary times (possibly through having several overlapping canvas elements being simultaneously drawn to).
