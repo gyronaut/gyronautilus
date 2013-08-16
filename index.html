@@ -42,14 +42,12 @@
 		});
 		$('#next_pic').on('click', function(e){
 			if($('#next_pic').hasClass('enabled-right')){
-				current_image += 1;
-				transitionAnimation(current_image);
+				transitionAnimation(current_image+1);
 			}
 		});
 		$('#prev_pic').on('click', function(e){
 			if($('#prev_pic').hasClass('enabled-left')){
-				current_image -= 1;
-				transitionAnimation(current_image);
+				transitionAnimation(current_image-1);
 			}
 		});
 			
