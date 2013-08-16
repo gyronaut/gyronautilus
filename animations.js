@@ -848,18 +848,36 @@ function changeCanvas(x, y, is_shifted)
 		}
 	}
 }
-function drawNewImage(index){
-	var ctx = $('#test_canvas')[0].getContext('2d');
-	ctx.clearRect(0, 0, 700, 575);
+function drawNewImg(index){
 	hit_regions.clearRect(0, 0, 700, 575);
-	ctx.drawImage(main_images[index], 0, 0);
 	if(index==0){
 		drawRegions();
+	}
+	if(current_image > index){
+		drawNewImgAnimation(index, 10, 0, -700);
+	}else{
+		drawNewImgAnimation(index, -10, 0, 700);
+	}
+}
+
+function drawNewImgAnimation(index, shift, position_old_img, position_new_img){
+	var ctx = $('#test_canvas')[0].getContext('2d');
+	if((shift < 0 && position_new_image <= 0) || (shift > 0 && position_new_image >= 0)){
+		ctx.clearRect(0, 0, 700, 575);
+		ctx.drawImage(main_images[index], 0, 0);
+		current_image = index;
+	}else{
+		setTimeout(function(){
+			drawNewImgAnimation(index, shift, position_old_img+shift, position_new_img+shift);
+		}), 80);
+		ctx.clearRect(0, 0, 700, 575);
+		ctx.drawImage(main_images[current_image], position_old_img, 0);
+		ctx.drawImage(main_images[index], position_new_img, 0);
 	}
 }
 
 function transitionAnimation(index){
-	drawNewImage(index);
+	drawNewImg(index);
 	if(index==2){
 		$('#next_pic').removeClass('enabled-right active').addClass('disabled-right inactive');
 		$('#prev_pic').removeClass('disabled-left inactive').addClass('enabled-left active');
