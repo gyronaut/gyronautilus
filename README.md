@@ -16,6 +16,16 @@ Current State
 + **Layered Text:**
   + On mousing over a part of the painting, a distinct block of text is brought to the foreground amongst several stacked text blocks.  This is accomplished solely through CSS (no javascript), and is more just a test of what's possible.
 
+###Bird Painting###
++ Only an unfinished place-holder
+
+###Rabbit Painting###
++ Only an unfinished place-holder
+
+###Navigation###
++ Arrows
+  + Can use the arrows to scroll through the different paintings. They are made "active/inactive" depending on the current image.
+
 Future Goals
 -----------------
 ###Doe Painting###
@@ -33,6 +43,10 @@ Future Goals
 ###Other Images###
 + **Transitions**
   + Play around with adding transition animations that would take the viewer from one painting to the next (utilizing some sort of continuous element - the bird maybe?).  Could keep the basic structure of the page the same, just "shift the view" of the canvas over to one side (could also change the surrounding area - new text layers, something else entirely, etc.
++ **Navigation**
+  + Add a grid/row of squares that can be clicked on to move directly to a different image.
+  + Allow arrow keys to also scroll through images (left and right arrows)
+  + Fix the way the Doe image defines the "sky" region, so that what parts are interactive can be properly reset between images.
 
 ###Misc. Ideas###
 + **Constant animations:**

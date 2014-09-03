@@ -1,4 +1,3 @@
-	
 var hit_regions;
 var previous_area_name;
 var area_name;
@@ -19,6 +18,7 @@ main_images[1] = bird_image;
 main_images[2] = rabbit_image;
 
 var blank_sky = new Image();
+var blank_deer = new Image();
 
 var is_active = false;
 
@@ -43,8 +43,6 @@ bird_frame_pos_array[4] = {top: 79, left: 57};
 bird_frame_pos_array[5] = {top: 342, left: 299};
 bird_frame_pos_array[6] = {top: 329, left: 319};	
 
-var blank_deer = new Image();
-
 var deer_clipping_regions = [];
 
 var sky_block_regions = new Array(sky_num_rows);
@@ -61,6 +59,12 @@ for(var row = 0; row < sky_num_rows; row++){
 */
 
 function initRegions(){
+
+	var hit_region_canvas = document.createElement('canvas');
+	hit_region_canvas.width = 700;
+	hit_region_canvas.height = 600;
+	hit_regions = hit_region_canvas.getContext('2d');
+	
 	deer_clipping_regions[0] = [{num_pts: 15},  {x: 65, y: 79}, {x: 132, y: 123}, {x: 133, y: 97}, {x: 202, y: 97}, {x: 202, y: 120}, {x: 222, y: 117}, {x: 249, y: 90}, {x: 300, y: 86}, {x: 611, y: 86}, {x: 611, y: 375}, {x: 607, y: 377}, {x: 591, y: 368}, {x: 575, y: 397}, {x: 571, y:500 }, {x: 65, y: 500}];
 	deer_clipping_regions[1] = [{num_pts: 18}, {x: 110, y: 151}, {x: 128, y: 150}, {x: 139, y: 115}, {x: 190, y: 94}, {x: 189, y: 124}, {x: 200, y: 144}, {x: 182, y: 171}, {x: 182, y: 183}, {x: 187, y: 196}, {x: 214, y: 185}, {x: 577, y: 185}, {x: 577, y: 303}, {x: 591, y: 364}, {x: 577, y: 392}, {x: 514, y: 392}, {x: 455, y: 453}, {x: 455, y: 500}, {x: 110, y: 500}];
 	deer_clipping_regions[2] = [{num_pts: 16}, {x: 112, y: 188}, {x: 148, y: 195}, {x: 149, y: 216}, {x: 162, y: 206}, {x: 178, y: 205}, {x: 192, y: 213}, {x: 192, y: 246}, {x: 209, y: 234}, {x: 462, y: 234}, {x: 462, y: 265}, {x: 423, y: 313}, {x: 528, y: 340}, {x: 516, y: 392}, {x: 455, y: 444}, {x: 455, y: 500}, {x: 112, y: 500}];
@@ -68,7 +72,7 @@ function initRegions(){
 	deer_clipping_regions[4] = [{num_pts: 17}, {x: 291, y: 258}, {x: 361, y: 254}, {x: 425, y: 258}, {x: 460, y: 264}, {x: 380, y: 365}, {x: 409, y: 397}, {x: 487, y: 416}, {x: 454, y: 442}, {x: 388, y: 446}, {x: 378, y: 457}, {x: 196, y: 463}, {x: 203, y: 442}, {x: 282, y: 443}, {x: 251, y: 383}, {x: 268, y: 375}, {x: 238, y: 363}, {x: 227, y: 320}];
 	deer_clipping_regions[5] = [{num_pts: 13}, {x: 460, y: 264}, {x: 380, y: 365}, {x: 406, y: 400}, {x: 360, y: 411}, {x: 383, y: 447}, {x: 382, y: 456}, {x: 320, y: 461}, {x: 314, y: 377}, {x: 338, y: 324}, {x: 295, y: 301}, {x: 291, y: 258}, {x: 361, y: 254}, {x: 425, y: 258}];
 	deer_clipping_regions[6] = [{num_pts: 7}, {x: 322, y: 364}, {x: 338, y: 323}, {x: 444, y: 264}, {x: 460, y: 264}, {x: 380, y: 365}, {x: 406, y: 400}, {x: 359, y: 415}];
-	
+
 	/* Set up Array defining each of the "sky-blocks" of corrugated
 	 * cardboard (should be hexagons, so 6 points each to define them).
 	 * This will allow paths to be drawn much easier around these
@@ -77,7 +81,7 @@ function initRegions(){
 	 * the "hit regions" canvas to determine where the cursor is in the
 	 * image).
 	 */		
-	
+
 	sky_block_regions[0][1] = [{x: 90, y: 23}, {x: 96, y: 23}, {x: 96, y: 25}, {x: 67, y: 70}, {x: 80 , y: 37}, {x: 80, y: 36}];
 	sky_block_regions[0][3] = [{x: 117, y: 23}, {x: 144, y: 23}, {x: 145, y: 24}, {x: 116, y: 48}, {x: 96, y: 25}, {x: 97, y: 23}];
 	sky_block_regions[0][5] = [{x: 168, y: 23}, {x: 195, y: 23}, {x: 195, y: 27}, {x: 168, y: 51}, {x: 143, y: 24}, {x: 143, y: 23}];
@@ -90,7 +94,7 @@ function initRegions(){
 	sky_block_regions[0][19] = [{x: 566, y: 23}, {x: 596, y: 23}, {x: 596, y: 25}, {x: 566, y: 53}, {x: 539, y: 28}, {x: 539, y: 23}]; 
 	sky_block_regions[0][21] = [{x: 622, y: 23}, {x: 649, y: 23}, {x: 649, y: 29}, {x: 622, y: 49}, {x: 596, y: 25}, {x: 596, y: 23}]; 
 	sky_block_regions[0][23] = [{x: 675, y: 23}, {x: 692, y: 23}, {x: 692, y: 30}, {x: 675, y: 47}, {x: 649, y: 29}, {x: 649, y: 23}]; 
-	
+
 	sky_block_regions[1][0] = [{x: 65, y: 35}, {x: 80, y: 36}, {x: 80, y: 60}, {x: 67, y: 70}, {x: 43, y: 53}, {x: 45, y: 35}];
 	sky_block_regions[1][2] = [{x: 97, y: 23}, {x: 117, y: 47}, {x: 117, y: 67}, {x: 95, y: 83}, {x: 80, y: 60}, {x: 80, y: 41}];
 	sky_block_regions[1][4] = [{x: 144, y: 23}, {x: 168, y: 50}, {x: 168, y: 64}, {x: 142, y: 85}, {x: 117, y: 67}, {x: 117, y: 47}];
@@ -104,7 +108,7 @@ function initRegions(){
 	sky_block_regions[1][20] = [{x: 597, y: 24}, {x: 622, y: 48}, {x: 622, y: 61}, {x: 592, y: 84}, {x: 566, y: 64}, {x: 566, y: 52}];
 	sky_block_regions[1][22] = [{x: 650, y: 28}, {x: 675, y: 46}, {x: 675, y: 57}, {x: 648, y: 79}, {x: 622, y: 61}, {x: 622, y: 48}];
 	sky_block_regions[1][24] = [{x: 693, y: 29}, {x: 693, y: 50}, {x: 693, y: 60}, {x: 693, y: 73}, {x: 675, y: 57}, {x: 675, y: 46}];
-	
+
 	sky_block_regions[2][1] = [{}, {}, {x: 94, y: 98}, {x: 70, y: 119}, {x: 43, y: 97}, {}];
 	sky_block_regions[2][3] = [{}, {}, {x: 142, y: 98}, {x: 114, y: 116}, {}, {}];
 	sky_block_regions[2][5] = [{}, {}, {x: 198, y: 96}, {x: 168, y: 112}, {}, {}];
@@ -130,7 +134,7 @@ function initRegions(){
 	sky_block_regions[3][20] = [{}, {}, {x: 619, y: 137}, {x: 592, y: 156}, {}, {}];
 	sky_block_regions[3][22] = [{}, {}, {x: 671, y: 131}, {x: 640, y: 153}, {}, {}];
 	sky_block_regions[3][24] = [{}, {}, {x: 687, y: 128}, {x: 687, y: 145}, {}, {}];
-	
+
 	sky_block_regions[4][0] = [{x: 44, y: 146}, {x: 74, y: 168}, {x: 73, y: 180}, {x: 43, y: 196}, {x: 43, y: 178}, {x: 43, y: 163}];
 	sky_block_regions[4][2] = [{}, {}, {x: 125, y: 178}, {x: 99, y: 196}, {}, {}];
 	sky_block_regions[4][5] = [{}, {}, {x: 211, y: 182}, {x: 163, y: 196}, {}, {}];
@@ -143,7 +147,7 @@ function initRegions(){
 	sky_block_regions[4][19] = [{}, {}, {x: 591, y: 168}, {x: 561, y: 184}, {}, {}];
 	sky_block_regions[4][21] = [{}, {}, {x: 641, y: 166}, {x: 615, y: 184}, {}, {}];
 	sky_block_regions[4][23] = [{}, {}, {x: 687, y: 172}, {x: 667, y: 190}, {}, {}];
-	
+
 	sky_block_regions[5][1] = [{}, {}, {x: 98, y: 209}, {x: 76, y: 231}, {x: 44, y: 213}, {}];
 	sky_block_regions[5][3] = [{}, {}, {x: 156, y: 207}, {x: 124, y: 221}, {}, {}];
 	sky_block_regions[5][6] = [{}, {}, {x: 238, y: 207}, {x: 208, y: 225}, {}, {}];
@@ -156,7 +160,7 @@ function initRegions(){
 	sky_block_regions[5][20] = [{}, {}, {x: 616, y: 199}, {x: 588, y: 217}, {}, {}];
 	sky_block_regions[5][22] = [{}, {}, {x: 670, y: 205}, {x: 640, y: 219}, {}, {}];
 	sky_block_regions[5][24] = [{}, {}, {x: 684, y: 195}, {x: 684, y: 215}, {}, {}];
-	
+
 	sky_block_regions[6][0] = [{x:43, y:213}, {x: 76, y: 231}, {x: 77, y: 239}, {x: 45, y: 239}, {x: 43, y: 239}, {x:43, y:215}];
 	sky_block_regions[6][2] = [{}, {}, {x: 123, y: 239}, {x: 103, y: 239}, {}, {}];
 	sky_block_regions[6][5] = [{}, {}, {x: 211, y: 239}, {x: 165, y: 239}, {}, {}];
@@ -169,8 +173,8 @@ function initRegions(){
 	sky_block_regions[6][19] = [{}, {}, {x: 587, y: 235}, {x: 559, y: 235}, {}, {}];
 	sky_block_regions[6][21] = [{}, {}, {x: 637, y: 235}, {x: 613, y: 235}, {}, {}];
 	sky_block_regions[6][23] = [{}, {}, {x: 685, y: 235}, {x: 669, y: 235}, {}, {}];
-	
-	
+
+
 	for(var row = 2; row < 7; row++){
 		if(row%2 == 1){
 			for(var col = 0; col < 25; col+=2){
@@ -233,13 +237,8 @@ function initRegions(){
 		}
 	}
 }
-	
-function drawRegions(){
-	var hit_region_canvas = document.createElement('canvas');
-	hit_region_canvas.width = 700;
-	hit_region_canvas.height = 600;
-	hit_regions = hit_region_canvas.getContext('2d');
 
+function drawRegions(){
 	//drawing different sky regions on the hit_regions canvas - the color is row/column dependant as rgb(0, 10*(col+1), 20*(row+1))
 	for(var row = 0; row < 7; row++){
 		if(row%2 == 1){
@@ -283,10 +282,10 @@ function drawRegions(){
 			}
 		}
 	}
-	
+
 /* Draw region that contains the deer body:
 */
-	
+
 	hit_regions.fillStyle = 'rgb(200, 0, 200)';
 	hit_regions.beginPath();
 	hit_regions.moveTo(60, 50);
@@ -311,9 +310,9 @@ function drawRegions(){
 	hit_regions.lineTo(80, 120);
 	hit_regions.closePath();
 	hit_regions.fill();
-	
+
 //	document.body.appendChild(hit_region_canvas); 
-	
+
 }
 
 function initImages(){	
@@ -322,7 +321,7 @@ function initImages(){
 	blank_sky.src = "blank-sky.png";
 	bird_image.src = "birdpainting_test.png";
 	rabbit_image.src = "rabbit_test.png";
-	
+
 	bird_animation_array[0].src = "bird-animation/bird-emerge-frame-1.png";
 	bird_animation_array[1].src = "bird-animation/bird-emerge-frame-2.png";
 	bird_animation_array[2].src = "bird-animation/bird-frame-1.png";
@@ -357,7 +356,7 @@ function isInDeer(x,y)
 	ctx.lineTo(110, 155);
 	ctx.lineTo(80, 120);
 	ctx.closePath();
-	
+
 	return ctx.isPointInPath(x, y);
 }
 
@@ -474,7 +473,7 @@ function doBlankDeerAnimationClipping(frame_num)
 		if(is_sky_blank){
 			ctx.drawImage(blank_sky, 0, 0);
 		}
-		
+
 	}else{
 		ctx.drawImage(blank_deer, 0, 0);
 		is_active = false;
@@ -556,7 +555,7 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 		}
 		ctx.beginPath();
 		ctx.moveTo(sky_block_regions[draw_row][draw_col][5].x, sky_block_regions[draw_row][draw_col][5].y)
-		
+
 		//Do top:
 		while(current_col <= init_col + 2*stage){
 			if(current_row < 0){
@@ -591,7 +590,7 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 			ctx.lineTo(sky_block_regions[draw_row][draw_col][0].x, sky_block_regions[draw_row][draw_col][0].y);
 			current_col+=2;
 		}
-		
+
 		//Do top-right:
 		current_col-=2;
 		while(current_row <= row){
@@ -628,7 +627,7 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 			current_row++;
 			current_col++;
 		}
-		
+
 		//Do bottom-right:
 		current_col--;
 		current_row--;
@@ -774,9 +773,9 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 		if(is_deer_blank){
 			ctx.drawImage(blank_deer, 0, 0);
 		}
-		
+
 	}
-	
+
 }
 
 function getSkyRegion(x,y){
@@ -848,18 +847,44 @@ function changeCanvas(x, y, is_shifted)
 		}
 	}
 }
-function drawNewImage(index){
-	var ctx = $('#test_canvas')[0].getContext('2d');
-	ctx.clearRect(0, 0, 700, 575);
+function drawNewImg(index){
 	hit_regions.clearRect(0, 0, 700, 575);
-	ctx.drawImage(main_images[index], 0, 0);
 	if(index==0){
 		drawRegions();
+	}
+	if(current_image > index){
+		drawNewImgAnimation(index, 20, 0, -700);
+	}else{
+		drawNewImgAnimation(index, -20, 0, 700);
+	}
+}
+
+function drawNewImgAnimation(index, shift, position_old_img, position_new_img){
+	var ctx = $('#test_canvas')[0].getContext('2d');
+	if((shift < 0 && position_new_img <= 0) || (shift > 0 && position_new_img >= 0)){
+		ctx.clearRect(0, 0, 700, 575);
+		ctx.drawImage(main_images[index], 0, 0);
+		current_image = index;
+	}else{
+		setTimeout(function(){
+			drawNewImgAnimation(index, shift, position_old_img+shift, position_new_img+shift);
+		}, 20);
+		ctx.clearRect(0, 0, 700, 575);
+		ctx.drawImage(main_images[current_image], position_old_img, 0);
+		if(current_image == 0){
+			if(is_sky_blank){
+				ctx.drawImage(blank_sky, position_old_img, 0);
+			}
+			if(is_deer_blank){
+				ctx.drawImage(blank_deer, position_old_img, 0);
+			}
+		}
+		ctx.drawImage(main_images[index], position_new_img, 0);
 	}
 }
 
 function transitionAnimation(index){
-	drawNewImage(index);
+	drawNewImg(index);
 	if(index==2){
 		$('#next_pic').removeClass('enabled-right active').addClass('disabled-right inactive');
 		$('#prev_pic').removeClass('disabled-left inactive').addClass('enabled-left active');
