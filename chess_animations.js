@@ -17,15 +17,18 @@ function splitQuarters(x, y, w, h, red, green, blue){
 	hitRegions.fillStyle = color;
 	hitRegions.fillRect(Math.floor(x), Math.floor(y), Math.ceil(w), Math.ceil(h));
 
-	var factor = (red/20)%2;
-	
-	color = "rgb("+red+", "+green+", "+blue+")";
-	hitRegions.fillStyle = color;
-	hitRegions.fillRect(x+(factor)*w/2, y, w/2, h/2);
-	
-	color = "rgb("+red+", "+(green+Math.pow(10, red/20))+", "+blue+")";
-	hitRegions.fillStyle = color;
-	hitRegions.fillRect(x+(1-factor)*w/2, y+h/2, w/2, h/2);
+	//only replace new squares if we're not on the last level.
+	if(red<=40){
+		var factor = (red/20)%2;
+		
+		color = "rgb("+red+", "+green+", "+blue+")";
+		hitRegions.fillStyle = color;
+		hitRegions.fillRect(x+(factor)*w/2, y, w/2, h/2);
+		
+		color = "rgb("+red+", "+(green+Math.pow(10, red/20))+", "+blue+")";
+		hitRegions.fillStyle = color;
+		hitRegions.fillRect(x+(1-factor)*w/2, y+h/2, w/2, h/2);
+	}
 }
 
 function combineQuarters(x, y, w, h, red, green, blue){
@@ -89,15 +92,19 @@ function contract(data){
 		xOrigin += xOffset;
 		yOrigin += yOffset;
 	}
-	combineQuarters(xOrigin, yOrigin, subWidth, subHeight, data[0], data[1], data[2]);
+	if((data[0]/20)%2){
+		xOrigin -= subHeight;
+	}
+	splitQuarters(xOrigin, yOrigin, subWidth*2, subHeight*2, data[0], data[1], data[2]-50);
+	$('#output').append('<h5> ( '+xOrigin+', '+yOrigin+' ) '+subHeight+'</h5>');
 }
 
 function changeCanvas(x, y, isShifted){
 	var hitRegions = $('#test_canvas')[0].getContext('2d');
 	var data = hitRegions.getImageData(x, y, 1, 1).data;
-	if(isShifted){
+	if(data[2]%100!=0){
 		contract(data);
-	}else if((data[0] <= 40) && (data[2]%100 ==0)){
+	}else if((data[0] <= 40)){
 		//$('#test_out').append('<h5> pre-expand... </h5>');
 		expand(data);
 	}
