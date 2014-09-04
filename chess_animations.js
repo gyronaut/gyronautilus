@@ -1,5 +1,6 @@
 var width;
 var height;
+var currentlyInBackground
 
 function init(){
 	var hitRegionsCanvas = $('#test_canvas')[0];
@@ -7,6 +8,23 @@ function init(){
 	height = hitRegionsCanvas.height;
 	splitQuarters(0, 0, width, height, 0, 0, 100);
 	//$('#test_out').append('<h5> testing... </h5>');
+}
+
+function setCursor(isBackground){
+	currentlyInBackground = isBackground;
+	if(currentlyInBackground){
+		//change to "background cursor"
+		$('#output').html('is in background');
+	}else{
+		//change to other cursor
+		$('#output').html('nope!');
+	}
+}
+
+function updateCursor(isBackground){
+	if(currentlyInBackground != isBackground){
+		setCursor(isBackground);
+	}
 }
 
 function splitQuarters(x, y, w, h, red, green, blue){
@@ -32,10 +50,11 @@ function splitQuarters(x, y, w, h, red, green, blue){
 }
 
 function combineQuarters(x, y, w, h, red, green, blue){
+	$('#output').append('<h5> combined called! ( '+x+', '+y+' ) '+w+' </h5>');
 	var hitRegions = $('#test_canvas')[0].getContext('2d');
 	
 	blue = blue - blue%100;
-	green = green - Math.pow(10, red/20);
+	green = green%Math.pow(10, red/20);
 	red = red-20;
 	
 	
@@ -95,8 +114,12 @@ function contract(data){
 	if((data[0]/20)%2){
 		xOrigin -= subHeight;
 	}
-	splitQuarters(xOrigin, yOrigin, subWidth*2, subHeight*2, data[0], data[1], data[2]-50);
-	$('#output').append('<h5> ( '+xOrigin+', '+yOrigin+' ) '+subHeight+'</h5>');
+	if(level==0){
+		splitQuarters(xOrigin, yOrigin, subWidth*2, subHeight*2, data[0], data[1], data[2]-50);
+	}else{
+		combineQuarters(xOrigin, yOrigin, subWidth*2, subHeight*2, data[0], data[1], data[2]);
+	}
+	$('#output').append('<h5> ( '+xOrigin+', '+yOrigin+' ) '+subHeight+' lvl: '+level+'</h5>');
 }
 
 function changeCanvas(x, y, isShifted){

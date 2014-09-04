@@ -24,6 +24,15 @@
 			var hitRegions = $('#test_canvas')[0].getContext('2d');
 			var data = hitRegions.getImageData(x, y, 1, 1).data;
 			$('#test_out').html('( '+x+', '+y+' ):  rgb( '+data[0]+', '+data[1]+', '+data[2]+' )');
+			updateCursor(data[2]%100!=0);			
+		});
+		
+		$('#test_canvas').on('mouseover', function(event){
+			var x = event.pageX - $('#test_canvas').offset().left;
+			var y = event.pageY - $('#test_canvas').offset().top;
+			var hitRegions = $('#test_canvas')[0].getContext('2d');
+			var data = hitRegions.getImageData(x, y, 1, 1).data;
+			setCursor(data[2]%100!=0);
 		});
 			
 	});
