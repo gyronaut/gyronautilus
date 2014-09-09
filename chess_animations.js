@@ -13,10 +13,12 @@ function init(){
 function setCursor(isBackground){
 	currentlyInBackground = isBackground;
 	if(currentlyInBackground){
-		//change to "background cursor"
+		$('#test_canvas').removeClass('expand');
+		$('#test_canvas').addClass('contract');
 		$('#output').html('is in background');
 	}else{
-		//change to other cursor
+		$('#test_canvas').removeClass('contract');
+		$('#test_canvas').addClass('expand');
 		$('#output').html('nope!');
 	}
 }
