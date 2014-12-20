@@ -865,6 +865,14 @@ function drawNewImgAnimation(index, shift, position_old_img, position_new_img){
 		ctx.clearRect(0, 0, 700, 575);
 		ctx.drawImage(main_images[index], 0, 0);
 		current_image = index;
+		if(index >0){
+			ctx.fillStyle('rgba(0,0,0,0.5)');
+			ctx.fillRect(0,0,700,575);
+			ctx.font="30px Arial";
+			ctx.fillStyle('rgba(255,255,255,0.5)');
+			ctx.textAlign="center";
+			ctx.fillText("work in progress", 350, 280); 
+		}
 	}else{
 		setTimeout(function(){
 			drawNewImgAnimation(index, shift, position_old_img+shift, position_new_img+shift);
