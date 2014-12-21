@@ -15,6 +15,10 @@
 		initRegions();
 		drawRegions();
 		
+		context.fillStyle='rgba(0,0,0,0.4)';
+		context.font='45px Arial';
+		context.fillText("Loading...");
+
 		doe_image.onload = function(){
 			drawNewImage(0);
 		};
