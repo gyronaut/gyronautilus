@@ -854,8 +854,11 @@ function drawNewImg(index){
 	}
 	if(current_image > index){
 		drawNewImgAnimation(index, 20, 0, -700);
-	}else{
+	}else if(current_image < index){
 		drawNewImgAnimation(index, -20, 0, 700);
+	}else{
+		var ctx = $('#test_canvas')[0].getContext('2d');
+		ctx.drawImage(main_images[index], 0, 0);
 	}
 }
 
