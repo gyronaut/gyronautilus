@@ -1,4 +1,5 @@
 var hit_regions;
+var hit_regions_canvas;
 var previous_area_name;
 var area_name;
 var sky_num_rows = 7;
@@ -14,8 +15,8 @@ var bird_image = new Image();
 var rabbit_image = new Image();
 var main_images = new Array();
 main_images[0] = doe_image;
-main_images[1] = bird_image;
-main_images[2] = rabbit_image;
+main_images[1] = rabbit_image;
+main_images[2] = bird_image;
 
 var blank_sky = new Image();
 var blank_deer = new Image();
@@ -60,7 +61,7 @@ for(var row = 0; row < sky_num_rows; row++){
 
 function initRegions(){
 
-	var hit_region_canvas = document.createElement('canvas');
+	hit_region_canvas = document.createElement('canvas');
 	hit_region_canvas.width = 700;
 	hit_region_canvas.height = 600;
 	hit_regions = hit_region_canvas.getContext('2d');
@@ -311,7 +312,7 @@ function drawRegions(){
 	hit_regions.closePath();
 	hit_regions.fill();
 
-//	document.body.appendChild(hit_region_canvas); 
+	document.body.appendChild(hit_region_canvas); 
 
 }
 
@@ -554,8 +555,7 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 			draw_col = current_col;
 		}
 		ctx.beginPath();
-		ctx.moveTo(sky_block_regions[draw_row][draw_col][5].x, sky_block_regions[draw_row][draw_col][5].y)
-
+		var isFirstPoint = true;
 		//Do top:
 		while(current_col <= init_col + 2*stage){
 			if(current_row < 0){
@@ -576,8 +576,14 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 					draw_col = current_col;
 				}
 			}
-			if(draw_row > 2 && draw_col < 5 && stage!=0){
+			if(draw_row > 2 && ((draw_col <= 3 && draw_col%2 == 1 && draw_row%2 == 0)||(draw_col <= 4 && draw_col%2 == 0 && draw_row%2 == 1)) && stage!=0){
 				draw_col -=1;
+			}
+			if(draw_row > 2 && ((draw_col >= 4 && draw_col%2 == 0 && draw_row%2 == 0)||(draw_col >= 5 && draw_col%2 == 1 && draw_row%2 == 1)) && stage!=0){
+				draw_col +=1;
+			}
+			if(draw_row <= 2 && (draw_col%2 == draw_row%2)){
+				draw_col +=1;
 			}
 			if(draw_col <= 0){
 				if(draw_row <= 2){
@@ -586,8 +592,13 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 					draw_col = draw_row%2;
 				}
 			}
+			if(isFirstPoint){
+				ctx.moveTo(sky_block_regions[draw_row][draw_col][5].x, sky_block_regions[draw_row][draw_col][5].y);
+				isFirstPoint = false;
+			}
 			ctx.lineTo(sky_block_regions[draw_row][draw_col][5].x, sky_block_regions[draw_row][draw_col][5].y);
 			ctx.lineTo(sky_block_regions[draw_row][draw_col][0].x, sky_block_regions[draw_row][draw_col][0].y);
+
 			current_col+=2;
 		}
 
@@ -612,9 +623,16 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 					draw_col = current_col;
 				}
 			}
-			if(draw_row > 2 && draw_col < 5 && stage!=0){
+			if(draw_row > 2 && ((draw_col <= 3 && draw_col%2 == 1 && draw_row%2 == 0)||(draw_col <= 4 && draw_col%2 == 0 && draw_row%2 == 1)) && stage!=0){
 				draw_col -=1;
 			}
+			if(draw_row > 2 && ((draw_col >= 4 && draw_col%2 == 0 && draw_row%2 == 0)||(draw_col >= 5 && draw_col%2 == 1 && draw_row%2 == 1)) && stage!=0){
+				draw_col +=1;
+			}
+			if(draw_row <= 2 && (draw_col%2 == draw_row%2)){
+				draw_col +=1;
+			}
+
 			if(draw_col <= 0){
 				if(draw_row <= 2){
 					draw_col=1-draw_row%2;
@@ -650,8 +668,11 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 					draw_col = (current_col - (1-current_col%2));
 				}	
 			}
-			if(draw_row > 2 && draw_col < 5 && stage!=0){
+			if(draw_row > 2 && ((draw_col <= 3 && draw_col%2 == 1 && draw_row%2 == 0)||(draw_col <= 4 && draw_col%2 == 0 && draw_row%2 == 1)) && stage!=0){
 				draw_col -=1;
+			}
+			if(draw_row > 2 && ((draw_col >= 4 && draw_col%2 == 0 && draw_row%2 == 0)||(draw_col >= 5 && draw_col%2 == 1 && draw_row%2 == 1)) && stage!=0){
+				draw_col +=1;
 			}
 			if(draw_col <= 0){
 				if(draw_row <= 2){
@@ -689,9 +710,12 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 					draw_col = (current_col - (1-current_col%2));
 				}	
 			}
-			if(draw_row > 2 && draw_col < 5 && stage!=0){
+			if(draw_row > 2 && ((draw_col <= 3 && draw_col%2 == 1 && draw_row%2 == 0)||(draw_col <= 4 && draw_col%2 == 0 && draw_row%2 == 1)) && stage!=0){
 				draw_col -=1;
 			}
+			if(draw_row > 2 && ((draw_col >= 4 && draw_col%2 == 0 && draw_row%2 == 0)||(draw_col >= 5 && draw_col%2 == 1 && draw_row%2 == 1)) && stage!=0){
+				draw_col +=1;
+			}	
 			if(draw_col <= 0){
 				if(draw_row <= 2){
 					draw_col=1-draw_row%2;
@@ -716,8 +740,11 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 			}else{
 				draw_col = current_col;
 			}
-			if(draw_row > 2 && draw_col < 5 && stage!=0){
+			if(draw_row > 2 && ((draw_col <= 3 && draw_col%2 == 1 && draw_row%2 == 0)||(draw_col <= 4 && draw_col%2 == 0 && draw_row%2 == 1)) && stage!=0){
 				draw_col -=1;
+			}
+			if(draw_row > 2 && ((draw_col >= 4 && draw_col%2 == 0 && draw_row%2 == 0)||(draw_col >= 5 && draw_col%2 == 1 && draw_row%2 == 1)) && stage!=0){
+				draw_col +=1;
 			}
 			if(draw_col <= 0){
 				if(draw_row <= 2){
@@ -751,8 +778,11 @@ function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 					draw_col = current_col;
 				}
 			}
-			if(draw_row > 2 && draw_col < 5 && stage!=0){
+			if(draw_row > 2 && ((draw_col <= 3 && draw_col%2 == 1 && draw_row%2 == 0)||(draw_col <= 4 && draw_col%2 == 0 && draw_row%2 == 1)) && stage!=0){
 				draw_col -=1;
+			}
+			if(draw_row > 2 && ((draw_col >= 4 && draw_col%2 == 0 && draw_row%2 == 0)||(draw_col >= 5 && draw_col%2 == 1 && draw_row%2 == 1)) && stage!=0){
+				draw_col +=1;
 			}
 			if(draw_col <= 0){
 				if(draw_row <= 2){
