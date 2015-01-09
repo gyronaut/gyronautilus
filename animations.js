@@ -513,7 +513,7 @@ function doFillDeerAnimationClipping(frame_num){
 function doSkyAnimation(row, col, image_to_draw, stage, count, is_shifted){
 
 	var ctx = $('#test_canvas')[0].getContext('2d');
-	if(stage > 5){
+	if(stage > 7){
 		ctx.drawImage(image_to_draw, 0, 0);
 		if(is_deer_blank){
 			ctx.drawImage(blank_deer, 0, 0);
